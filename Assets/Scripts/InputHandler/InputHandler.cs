@@ -12,8 +12,14 @@ Vector2 movementValue = Vector2.zero;
 [HideInInspector]public float moveValX;
 [HideInInspector]public float moveValY;
 
+
+
 public delegate void Movement();
 public Movement moving;
+
+public delegate void Jumped();
+public Jumped jumping;
+ 
 
 
 public delegate void attackType(int value);
@@ -34,6 +40,15 @@ public void Move(InputAction.CallbackContext context)
         moving?.Invoke();
     }
 }
+
+public void Jump(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+
+            jumping?.Invoke();
+        }
+    }
 
 public void Kick(InputAction.CallbackContext context)
     {

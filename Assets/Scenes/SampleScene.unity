@@ -292,7 +292,19 @@ MonoBehaviour:
     m_ActionId: 83f4a7f2-1731-4846-bae7-409a5119a469
     m_ActionName: 'Player/Transformation[/Keyboard/e,/DualSenseGamepadHID/rightStickPress]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 42279597}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 35e5e400-7ba6-4324-920d-3470ebc5c518
     m_ActionName: 'Player/Jump[/Keyboard/space,/DualSenseGamepadHID/buttonSouth]'
   - m_PersistentCalls:
@@ -669,7 +681,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018557043}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18738104, y: 0.000017036407, z: -0.0000032498638, w: 0.9822873}
+  m_LocalRotation: {x: 0.18738104, y: 0.000017072698, z: -0.0000032567998, w: 0.9822873}
   m_LocalPosition: {x: 2.48, y: 5.6, z: -10.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -916,7 +928,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260867877}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18738104, y: 0.000017036407, z: -0.0000032498635, w: 0.9822873}
+  m_LocalRotation: {x: 0.18738104, y: 0.000017072696, z: -0.000003256786, w: 0.9822873}
   m_LocalPosition: {x: 2.48, y: 5.6, z: -10.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -990,6 +1002,31 @@ Transform:
   - {fileID: 1201637534}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2033916283 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8043028128659256610, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+  m_PrefabInstance: {fileID: 5126479969545549520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &2033916291 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 5713576388026729245, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+  m_PrefabInstance: {fileID: 5126479969545549520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2033916292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033916283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175b6cac9af8fdb448b8b497872b7694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::JumpHandler
+  inputHandler: {fileID: 42279597}
+  rb: {fileID: 2033916291}
+  jumpForce: 15
 --- !u!1001 &5126479969545549520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1006,6 +1043,14 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1260867881}
+    - target: {fileID: 5713576388026729245, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5713576388026729245, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7207579662003638877, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
       propertyPath: mainCamera
       value: 
@@ -1069,7 +1114,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8043028128659256610, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2033916292}
   m_SourcePrefab: {fileID: 100100000, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
