@@ -19,6 +19,9 @@ public Movement moving;
 
 public delegate void Jumped();
 public Jumped jumping;
+
+public delegate void Transformed();
+public Transformed transforming;
  
 
 
@@ -49,7 +52,13 @@ public void Jump(InputAction.CallbackContext context)
             jumping?.Invoke();
         }
     }
-
+public void Transformation(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            transforming?.Invoke();
+        }
+    }
 public void Kick(InputAction.CallbackContext context)
     {
         if (context.performed)

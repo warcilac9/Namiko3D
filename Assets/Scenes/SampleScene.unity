@@ -288,7 +288,19 @@ MonoBehaviour:
     m_ActionId: c30bb961-f5ab-47c5-a30e-2e0f1c2aaf66
     m_ActionName: 'Player/Magic[/Keyboard/o,/DualSenseGamepadHID/buttonNorth]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 42279597}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: Transformation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 83f4a7f2-1731-4846-bae7-409a5119a469
     m_ActionName: 'Player/Transformation[/Keyboard/e,/DualSenseGamepadHID/rightStickPress]'
   - m_PersistentCalls:
@@ -759,6 +771,16 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &608639340 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5770739945595466313, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+  m_PrefabInstance: {fileID: 5126479969545549520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &608639342 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3229040961012400934, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+  m_PrefabInstance: {fileID: 5126479969545549520}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &639585976 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1c786f6bf418028459e2655e82cac858, type: 3}
@@ -1314,6 +1336,25 @@ MonoBehaviour:
   inputHandler: {fileID: 42279597}
   rb: {fileID: 2033916291}
   jumpForce: 15
+--- !u!114 &2033916300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033916283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4e459137d9e57488b849f1c90a5ff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Transformation
+  inputHandler: {fileID: 42279597}
+  namikoSprite: {fileID: 608639340}
+  isTransforming: 0
+  transformCooldown: 3
+  magicalGirlNamiko: {fileID: 9100000, guid: 686fbb4d91c8f28428d5a12877b23344, type: 2}
+  animator: {fileID: 608639342}
+  animatorNamiko: {fileID: 0}
 --- !u!1001 &5126479969545549520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1405,6 +1446,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8043028128659256610, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2033916292}
+    - targetCorrespondingSourceObject: {fileID: 8043028128659256610, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2033916300}
   m_SourcePrefab: {fileID: 100100000, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
