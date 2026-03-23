@@ -23,13 +23,17 @@ public class Transformation : MonoBehaviour
         isTransforming = false;
         if (!isTransforming)
         {
-            isTransforming = true;
-            animator.SetTrigger("Transformation");
-            animatorNamiko.runtimeAnimatorController = magicalGirlNamiko;
-            Debug.Log("aaah:(");
+            StartCoroutine(ChangeAnimator());
         }
-        //yield return new WaitForSeconds(transformCooldown);
         isTransforming = false;
+        
+    }
+    IEnumerator ChangeAnimator()
+    {
+        isTransforming = true;
+        animator.SetTrigger("Transformation");
+        yield return new WaitForSeconds(1f);
+        animatorNamiko.runtimeAnimatorController = magicalGirlNamiko;
         
     }
     
