@@ -42,28 +42,28 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DistortAmplitude: -6.57
-    - _DistortNoisePeriod: -1.14
+    - _DistortAmplitude: -9.66
+    - _DistortNoisePeriod: -1.16
     - _GrainColorBlend: 0.5
     - _GrainPeriod: 1
     - _NormalStrength: 6.99
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SinFrecuency: 1.16
-    - _SineAmplitude: 0.16
-    - _SineFrecuency: 3.17
-    - _SineRotation: 4.2
+    - _SineAmplitude: 0.21
+    - _SineFrecuency: 5.53
+    - _SineRotation: 10.05
     - _SubstrateDuneHeightMax: 1
     - _SubstrateGrainHeightMAx: 1
     - _SubstrateTightening: 1
-    - _UVScale: -2.48
-    - _polygonSides: 7.61
+    - _UVScale: -0.21
+    - _polygonSides: 9.89
     m_Colors:
     - _Color: {r: 0.773, g: 0.7551272, b: 0.68810403, a: 1}
     - _SandHigh: {r: 0.99215686, g: 0.8405136, b: 0.44313732, a: 1}
     - _SandLow: {r: 0.3584906, g: 0.22904755, b: 0.032128863, a: 1}
     - _SubstrateColor: {r: 0.28870657, g: 0.26717696, b: 0.7169812, a: 1}
-    - _UV_tiling: {r: 2, g: 2, b: 0, a: 0}
+    - _UV_tiling: {r: 3, g: 2, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &3499719310872430846
