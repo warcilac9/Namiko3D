@@ -162,6 +162,8 @@ GameObject:
   - component: {fileID: 7598503623062253141}
   - component: {fileID: 741176515232122739}
   - component: {fileID: 7580622448901479105}
+  - component: {fileID: 1781130064939170407}
+  - component: {fileID: 6488552018304684843}
   m_Layer: 0
   m_Name: PlayerNamiko
   m_TagString: Untagged
@@ -185,6 +187,7 @@ Transform:
   - {fileID: 1415402770109865014}
   - {fileID: 6176590010294013346}
   - {fileID: 1366005827558780897}
+  - {fileID: 6480126663363879441}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5713576388026729245
@@ -345,6 +348,41 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1781130064939170407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8043028128659256610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175b6cac9af8fdb448b8b497872b7694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::JumpHandler
+  inputHandler: {fileID: 0}
+  rb: {fileID: 5713576388026729245}
+  groundCheck: {fileID: 3616200117327293914}
+  jumpForce: 15
+--- !u!114 &6488552018304684843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8043028128659256610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4e459137d9e57488b849f1c90a5ff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Transformation
+  inputHandler: {fileID: 0}
+  namikoSprite: {fileID: 5770739945595466313}
+  isTransforming: 0
+  transformCooldown: 3
+  magicalGirlNamiko: {fileID: 9100000, guid: 686fbb4d91c8f28428d5a12877b23344, type: 2}
+  animator: {fileID: 3229040961012400934}
+  animatorNamiko: {fileID: 0}
 --- !u!1 &8528388031542603924
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,3 +414,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9197435108726206418}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8689488482378222830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6480126663363879441}
+  - component: {fileID: 5957816239690340803}
+  - component: {fileID: 3616200117327293914}
+  m_Layer: 0
+  m_Name: groundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6480126663363879441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8689488482378222830}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.15, y: -1.7, z: 0}
+  m_LocalScale: {x: 0.30531, y: 0.4771, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9197435108726206418}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5957816239690340803
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8689488482378222830}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.46688998}
+  m_Center: {x: 0, y: 0, z: 0.057798803}
+--- !u!114 &3616200117327293914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8689488482378222830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c8df7debf23ec49acf3017cf139e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::groundCheck
+  groundTriggerCollider: {fileID: 5957816239690340803}
+  isGrounded: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8

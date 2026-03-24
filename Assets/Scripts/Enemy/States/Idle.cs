@@ -14,6 +14,7 @@ public class Idle : State
 
     public override void Enter()
     {
+        agent.isStopped = true;
         base.Enter();
         isChangingState = false;
         changeTimer = 0f;

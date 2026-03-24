@@ -4,6 +4,7 @@ public class JumpHandler : MonoBehaviour
 {
     public InputHandler inputHandler;
     [SerializeField] Rigidbody rb;
+    public groundCheck groundCheck;
 
     public float jumpForce;
     
@@ -19,8 +20,11 @@ public class JumpHandler : MonoBehaviour
 
     public void isJump()
     {
-        Debug.Log("is jumping");
-        rb.linearVelocity = new Vector3(rb.linearVelocity.y, jumpForce);
+        if(groundCheck.isGrounded == true)
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.y, jumpForce);
+        }
+        
         
     }
 }
