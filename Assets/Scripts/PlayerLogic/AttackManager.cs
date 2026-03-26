@@ -11,6 +11,8 @@ public class AttackManager : MonoBehaviour
     float comboTimer = 0f;
     bool canAttack = true;
     bool inComboCooldown = false;
+    [SerializeField] PoolManager poolManager;
+    [SerializeField] Transform originTransform;
 
     public InputHandler inputHandler;
 
@@ -106,6 +108,7 @@ public class AttackManager : MonoBehaviour
                 break;
             case 2:
                 attackPhase = 3;
+                poolManager.RequesObject(originTransform);
                 break;
             default:
                 attackPhase = 0;

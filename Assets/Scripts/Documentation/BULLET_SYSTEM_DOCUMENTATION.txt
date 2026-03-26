@@ -1,0 +1,432 @@
+================================================================================
+                    BULLET SYSTEM DOCUMENTATION
+              Complete Breakdown of How Bullets Work in Namiko3D
+================================================================================
+
+OVERVIEW
+--------
+The bullet system has three main components working together:
+1. SpriteHandler - Determines which direction the player is facing
+2. PoolManager - Spawns bullets with the correct direction
+3. NamikoMagic - Moves the bullet in the predetermined direction
+
+================================================================================
+PART 1: SPRITEHANDLER.cs - Detecting Player Facing Direction
+================================================================================
+
+PURPOSE:
+Constantly checks the player's movement and determines if the player is moving
+left or right. This is stored in the "isRight" boolean variable.
+
+CODE BREAKDOWN:
+
+    public bool isRight;
+    
+    Purpose: Stores whether the player is facing right (true) or left (false)
+    Used by: PoolManager to determine bullet direction
+
+
+    void Update()
+    {
+        Vector3 velocity = rb.linearVelocity;
+        Vector3 cameraRight = mainCamera.transform.right;
+        float horizontalSpeed = Vector3.Dot(velocity, cameraRight);
+        
+    How it works:
+    - Gets the player's current velocity (movement vector)
+    - Gets the camera's "right" direction (left-right axis relative to camera)
+    - Calculates how much the velocity is moving in the camera's right direction
+    - This "dot product" tells us: positive = moving right, negative = moving left
+
+
+        if (Mathf.Abs(horizontalSpeed) > flipThreshold)
+        {
+            Vector3 currentScale = playerSprite.localScale;
+            
+            if (horizontalSpeed < 0)
+            {
+                currentScale.x = Mathf.Abs(currentScale.x);
+                isRight = true;  <-- PLAYER FACING RIGHT
+            }
+            else if (horizontalSpeed > 0)
+            {
+                currentScale.x = -Mathf.Abs(currentScale.x);
+                isRight = false;  <-- PLAYER FACING LEFT
+            }
+            
+            playerSprite.localScale = currentScale;
+        }
+    
+    How it works:
+    - Only updates if movement is above "flipThreshold" (0.1) - prevents jitter
+    - If moving LEFT (horizontalSpeed < 0):
+      * Flips sprite scale to show it facing right
+      * Sets isRight = true
+    - If moving RIGHT (horizontalSpeed > 0):
+      * Flips sprite scale to show it facing left
+      * Sets isRight = false
+    - The sprite visual and isRight variable ALWAYS stay in sync
+
+
+KEY POINT: isRight represents what the player is aiming/facing, used later by
+PoolManager to calculate bullet direction.
+
+================================================================================
+PART 2: POOLMANAGER.cs - Spawning Bullets with Correct Direction
+================================================================================
+
+PURPOSE:
+Manages a pool of bullet objects. When a bullet is needed, it retrieves one
+from the pool, sets its position and direction, then activates it.
+
+CODE BREAKDOWN:
+
+    [SerializeField] private SpriteHandler spriteHandler;
+    [SerializeField] private Camera mainCamera;
+    
+    Purpose: References needed to calculate bullet direction
+    - spriteHandler: To get isRight (which way player is facing)
+    - mainCamera: To get world-space direction vectors
+
+
+    void Start()
+    {
+        if (spriteHandler == null)
+        {
+            spriteHandler = origin.parent?.GetComponent<SpriteHandler>();
+        }
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
+        AddObjectsToPool(poolSize);
+    }
+    
+    How it works:
+    - If SpriteHandler not manually assigned, automatically finds it on parent
+    - If Camera not assigned, uses the main camera
+    - Creates initial pool of 10 bullets
+
+
+    public GameObject RequesObject(Transform position)
+    {
+        for (int i = 0; i < bulletList.Count; i++)
+        {
+            if (!bulletList[i].activeSelf)
+            {
+                SetBulletDirectionAndSpawn(bulletList[i], position);
+                return bulletList[i];
+            }
+        }
+        AddObjectsToPool(1);
+        SetBulletDirectionAndSpawn(bulletList[bulletList.Count - 1], position);
+        return bulletList[bulletList.Count - 1];
+    }
+    
+    How it works:
+    1. Loops through all pooled bullets
+    2. Finds the first one that's NOT active (disabled)
+    3. If found: sets it up and returns it
+    4. If NONE are available: creates 1 more bullet, sets it up, returns it
+    5. This is called by your shooting script to spawn a bullet
+
+
+    private void SetBulletDirectionAndSpawn(GameObject bullet, Transform spawnPoint)
+    {
+        bullet.transform.position = spawnPoint.position;
+        
+    Set the bullet's position to the spawn point (usually the origin empty GameObject)
+
+
+        NamikoMagic bulletScript = bullet.GetComponent<NamikoMagic>();
+        if (bulletScript != null && spriteHandler != null && mainCamera != null)
+        {
+    Get reference to the NamikoMagic script attached to the bullet
+    Only proceed if all required components exist
+
+
+            Vector3 bulletDirection = spriteHandler.isRight 
+                ? -mainCamera.transform.right 
+                : mainCamera.transform.right;
+    
+    THIS IS THE KEY LINE - Calculate the bullet's travel direction:
+    
+    - mainCamera.transform.right = the world-space vector pointing to the right
+                                    relative to the camera
+    
+    - spriteHandler.isRight = true if player facing right, false if facing left
+    
+    - LOGIC:
+      * If isRight = true (player facing RIGHT):
+        → bullet travels in -mainCamera.transform.right (LEFT direction)
+        → OPPOSITE direction? Because when isRight=true, sprite flips, so
+          the player is actually facing the opposite way visually!
+      
+      * If isRight = false (player facing LEFT):
+        → bullet travels in mainCamera.transform.right (RIGHT direction)
+    
+    The negation is there because of how the sprite flipping works in this game.
+
+
+            bulletScript.SetDirection(bulletDirection);
+        }
+        
+        bullet.SetActive(true);
+    
+    Pass the calculated direction to the bullet script
+    Activate the bullet so it appears and starts moving
+
+
+KEY POINT: PoolManager calculates the direction based on:
+1. Which way the player is visually facing (isRight from SpriteHandler)
+2. The camera's coordinate system (mainCamera.transform.right)
+Then passes this direction to the bullet.
+
+================================================================================
+PART 3: NAMIKOMAGIC.cs - Moving the Bullet
+================================================================================
+
+PURPOSE:
+Each bullet stores a direction vector and moves continuously in that direction
+at a constant speed.
+
+CODE BREAKDOWN:
+
+    public float movementSpeed;
+    private Vector3 bulletDirection = Vector3.right;  // Default direction
+    
+    Stores:
+    - movementSpeed: How fast the bullet travels (set in Inspector)
+    - bulletDirection: The direction the bullet will travel (set by PoolManager)
+
+
+    public void SetDirection(Vector3 direction)
+    {
+        bulletDirection = direction.normalized;
+    }
+    
+    How it works:
+    - Called by PoolManager when bullet is spawned
+    - Receives the direction vector calculated by PoolManager
+    - Normalizes it (makes it length 1) so speed is consistent
+    
+    Example:
+    - If direction passed is (-1, 0, 0), normalized stays (-1, 0, 0)
+    - If direction passed is (-2, 0, 0), normalized becomes (-1, 0, 0)
+    - If direction passed is (-1, -1, 0), normalized becomes (-0.707, -0.707, 0)
+    
+    Normalization ensures the bullet speed is always "movementSpeed" regardless
+    of what direction vector was passed in.
+
+
+    void Update()
+    {
+        transform.position += bulletDirection * movementSpeed * Time.deltaTime;
+    }
+    
+    How it works:
+    - EVERY FRAME, updates the bullet's position
+    - Formula: position = position + (direction × speed × frame_time)
+    
+    Breaking it down:
+    - bulletDirection: Which way to move (-1,0,0, 1,0,0, 0,1,0, etc.)
+    - movementSpeed: How far per second (e.g., 20 units/second)
+    - Time.deltaTime: Time since last frame (e.g., 0.016 seconds at 60 FPS)
+    
+    Example at 60 FPS with movementSpeed=20:
+    - Each frame moves: bulletDirection × 20 × 0.016 = bulletDirection × 0.32 units
+    - Over 1 second: moves 20 units in the bulletDirection
+    
+    This is SIMPLE LINEAR MOVEMENT - no acceleration, no collision, just
+    straight line movement.
+
+
+    void OnBecameInvisible()
+    {
+        resetObj();
+    }
+    
+    How it works:
+    - Called automatically when bullet goes off-screen
+    - Deactivates the bullet and returns it to the pool
+
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.TryGetComponent<enemyHealth>(out var enemyHealth))
+        {
+            resetObj();
+        }
+    }
+    
+    How it works:
+    - Called when bullet collides with something
+    - Checks if it hit an enemy (has enemyHealth component)
+    - If yes: deals damage and deactivates bullet
+    - If no: ignores the collision
+
+
+    void OnDrawGizmos()
+    {
+        if (!gameObject.activeSelf) return;
+        
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, 0.1f);
+        
+        Visualization in editor:
+        - Draws a small RED SPHERE at the bullet's position
+        - Helps debug where your bullet is in the scene
+
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + bulletDirection * 2f);
+        
+        - Draws a GREEN LINE showing the direction the bullet will travel
+        - Line extends 2 units long so it's visible
+        - If bullet moves right: green line points right
+        - If bullet moves left: green line points left
+
+
+        Gizmos.color = Color.yellow;
+        Vector3 nextPosition = transform.position + bulletDirection * movementSpeed * Time.deltaTime;
+        Gizmos.DrawLine(transform.position, nextPosition);
+    }
+    
+    - Draws a YELLOW LINE showing how far the bullet will move next frame
+    - Useful for visualizing the current speed
+
+
+================================================================================
+COMPLETE FLOW - How Everything Works Together
+================================================================================
+
+1. PLAYER MOVES:
+   └─ SpriteHandler detects movement
+   └─ Updates isRight based on direction
+   └─ Flips sprite graphic to match
+
+
+2. PLAYER FIRES BULLET:
+   └─ Calls PoolManager.RequesObject(origin.transform)
+   └─ PoolManager spawns/reuses a bullet
+
+
+3. BULLET SETUP (SetBulletDirectionAndSpawn):
+   └─ Position set to spawn point (origin)
+   └─ Direction calculated:
+      Reads isRight from SpriteHandler
+      Reads camera.right from mainCamera
+      Combines them to calculate real world direction
+   └─ Calls bulletScript.SetDirection(calculatedDirection)
+   └─ Bullet activated
+
+
+4. BULLET MOVES (Every Frame):
+   └─ NamikoMagic.Update() runs
+   └─ Moves bullet forward:
+      position += bulletDirection × movementSpeed × Time.deltaTime
+   └─ If hits enemy: deactivates
+   └─ If goes off-screen: deactivates
+
+
+5. BULLET RECYCLING:
+   └─ Deactivated bullet stays in pool (not destroyed)
+   └─ Next time a bullet needed, pool reuses it
+   └─ Reduces garbage collection, improves performance
+
+
+================================================================================
+WHY THIS SYSTEM WORKS
+================================================================================
+
+✓ CLEAN SEPARATION OF CONCERNS:
+  - SpriteHandler: Only tracks facing direction
+  - PoolManager: Only handles spawning and direction calculation
+  - NamikoMagic: Only moves the bullet
+
+✓ INDEPENDENT MOVEMENT:
+  - Bullet doesn't rely on transform.right (rotation)
+  - Uses stored vector instead
+  - Works even if bullet is rotated or positioned oddly
+
+✓ EFFICIENT:
+  - Reuses bullets instead of creating/destroying
+  - Simple vector math in Update()
+  - No complex physics calculations
+
+✓ EASY TO DEBUG:
+  - Gizmos show exactly where bullet is
+  - Gizmos show exactly which direction it's traveling
+  - Can spot issues immediately in Scene view
+
+
+================================================================================
+COMMON ISSUES & SOLUTIONS
+================================================================================
+
+ISSUE: Bullet always goes same direction
+─────────────────────────────────────────
+CAUSE: SpriteHandler.isRight not updating
+FIX: Ensure SpriteHandler is assigned in PoolManager Inspector
+
+
+ISSUE: Bullet goes opposite direction
+─────────────────────────────────────────
+CAUSE: The negation logic in PoolManager might be wrong for your sprite setup
+FIX: Flip the ternary operator (swap the - and nothing before mainCamera.transform.right)
+
+
+ISSUE: Bullet moves too fast/slow
+─────────────────────────────────────────
+CAUSE: movementSpeed value incorrect
+FIX: Adjust NamikoMagic.movementSpeed in Inspector (try 20-30 for reasonable speed)
+
+
+ISSUE: Bullet disappears immediately
+─────────────────────────────────────────
+CAUSE: Maybe spawning inside a collider
+FIX: Make sure origin point is not inside walls
+
+
+================================================================================
+MODIFICATION EXAMPLES
+================================================================================
+
+MAKE BULLETS CURVE:
+───────────────────
+In NamikoMagic.Update(), instead of:
+    transform.position += bulletDirection * movementSpeed * Time.deltaTime;
+
+Do:
+    bulletDirection = Quaternion.Euler(0, 10f * Time.deltaTime, 0) * bulletDirection;
+    transform.position += bulletDirection * movementSpeed * Time.deltaTime;
+
+This rotates the direction slightly each frame, creating a curve.
+
+
+MAKE BULLETS ACCELERATE:
+───────────────────────
+In NamikoMagic, add:
+    private float currentSpeed;
+    
+    void Start() { currentSpeed = movementSpeed; }
+    
+    void Update()
+    {
+        currentSpeed += 5f * Time.deltaTime;  // Accelerate
+        transform.position += bulletDirection * currentSpeed * Time.deltaTime;
+    }
+
+
+MAKE BULLETS BOUNCE OFF WALLS:
+──────────────────────────────
+In NamikoMagic.OnTriggerEnter():
+    if (collision.CompareTag("Wall"))
+    {
+        bulletDirection = Vector3.Reflect(bulletDirection, collision.GetComponent<Collider>().bounds.size);
+    }
+
+
+================================================================================
+END OF DOCUMENTATION
+================================================================================

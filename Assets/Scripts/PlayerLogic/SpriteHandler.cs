@@ -6,6 +6,7 @@ public class SpriteHandler : MonoBehaviour
     [SerializeField] Rigidbody rb;
     [SerializeField] Transform playerSprite;
     [SerializeField] Camera mainCamera;
+    public bool isRight;
     
     private float flipThreshold = 0.1f;
 
@@ -24,10 +25,12 @@ public class SpriteHandler : MonoBehaviour
             if (horizontalSpeed < 0)
             {
                 currentScale.x = Mathf.Abs(currentScale.x);
+                isRight = true;
             }
             else if (horizontalSpeed > 0)
             {
                 currentScale.x = -Mathf.Abs(currentScale.x);
+                isRight = false;
             }
             
             playerSprite.localScale = currentScale;
