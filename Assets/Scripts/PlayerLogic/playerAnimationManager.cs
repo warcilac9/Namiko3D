@@ -11,6 +11,7 @@ public class playerAnimationManager : MonoBehaviour
     public AttackManager attackManager;
 
     public int counter = 0;
+    private int lastAttackPhase = 0;
 
     void OnEnable()
     {
@@ -36,7 +37,12 @@ public class playerAnimationManager : MonoBehaviour
         {
             animator.SetBool("isWalking", false);
         }
-        attackAnimation(attackManager.attackPhase);
+        int currentPhase = attackManager.attackPhase;
+        if (currentPhase != lastAttackPhase)
+        {
+            attackAnimation(currentPhase);
+            lastAttackPhase = currentPhase;
+        }
     }
 
     public void attackAnimation(int phase)
