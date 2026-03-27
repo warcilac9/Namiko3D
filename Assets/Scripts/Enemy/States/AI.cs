@@ -13,12 +13,56 @@ public class AI : MonoBehaviour
 
     void Start()
     {
-        agent = this.GetComponent<NavMeshAgent>();
-        currentState = new Idle(this.gameObject, agent, anim, player, minCooldown, maxCooldown, attackDuration);
+        agent = GetComponent<NavMeshAgent>();
+        TryResolvePlayer();
+
+        if (player != null)
+        {
+            currentState = new Idle(gameObject, agent, anim, player, minCooldown, maxCooldown, attackDuration);
+        }
+        else
+        {
+            Debug.LogWarning("AI: Player Transform not found. Assign it in the inspector or tag player as 'Player'.", this);
+        }
     }
 
     void Update()
     {
+        if (player == null)
+        {
+            TryResolvePlayer();
+            if (player == null)
+            {
+                return;
+            }
+
+            // Player was found later; initialize state machine now.
+            currentState = new Idle(gameObject, agent, anim, player, minCooldown, maxCooldown, attackDuration);
+        }
+
+        if (currentState == null)
+        {
+            currentState = new Idle(gameObject, agent, anim, player, minCooldown, maxCooldown, attackDuration);
+        }
+
         currentState = currentState.Process();
+    }
+
+    private void TryResolvePlayer()
+    {
+        if (player != null) return;
+
+        GameObject taggedPlayer = GameObject.FindGameObjectWithTag("Player");
+        if (taggedPlayer != null)
+        {
+            player = taggedPlayer.transform;
+            return;
+        }
+
+        GameObject namedPlayer = GameObject.Find("Player") ?? GameObject.Find("Namiko");
+        if (namedPlayer != null)
+        {
+            player = namedPlayer.transform;
+        }
     }
 }

@@ -8,9 +8,6 @@ public class HordeCamTrigger : MonoBehaviour
     public CinemachineCamera vcam2;
     public EventSOCamera changeCamEvent;
 
-    public delegate void changeCams(CinemachineCamera mainCamera, CinemachineCamera cameraToSwitch);
-    public changeCams ChangeCams;
-
     void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent<PlayerHealth>(out var playerHealth))

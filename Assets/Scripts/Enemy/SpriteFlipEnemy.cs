@@ -5,21 +5,34 @@ public class SpriteFlipEnemy : MonoBehaviour
     [Header("References")]
 
     [SerializeField] private Transform player;
-
-    [Tooltip("The transform that will be flipped (usually the sprite or model root). If empty, falls back to this GameObject's transform.")]
     [SerializeField] private Transform spriteTransform;
-
-    [Tooltip("Additional transforms to flip/rotate along with the sprite (e.g., hitboxes, child visuals). If empty, only the sprite transform will be modified.")]
     [SerializeField] private Transform[] flipTargets;
-
     [SerializeField] private Camera mainCamera;
 
     [Header("Settings")]
-    [Tooltip("Minimum horizontal difference (in camera-space units) required to change the flip state.")]
     [SerializeField] private float flipThreshold = 0.01f;
-
-    [Tooltip("If enabled, flipping is done via local Y rotation (+180 / 0) instead of inverting localScale.x. This avoids issues with NavMeshAgent and physics caused by negative scaling.")]
     [SerializeField] private bool useRotationFlip = true;
+
+    void Start()
+    {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
+
+        if (player == null)
+        {
+            GameObject taggedPlayer = GameObject.FindGameObjectWithTag("Player");
+            if (taggedPlayer != null)
+            {
+                player = taggedPlayer.transform;
+            }
+            if (player == null)
+            {
+                Debug.LogWarning("SpriteFlipEnemy: Player Transform not found. Assign it in the inspector.", this);
+            }
+        }
+    }
 
     private void Reset()
     {

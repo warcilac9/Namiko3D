@@ -1,10 +1,12 @@
 using UnityEngine;
+using System;
 
 public class enemyHealth : MonoBehaviour, iDamageable
 {
     int health;
     public int MaxHealth = 30;
     public Collider hitBox;
+    public event Action<enemyHealth> OnEnemyDefeated;
 
     void Awake()
     {
@@ -36,6 +38,7 @@ public class enemyHealth : MonoBehaviour, iDamageable
 
     void Death()
     {
+        OnEnemyDefeated?.Invoke(this);
         health=MaxHealth;
         gameObject.SetActive(false);
     }

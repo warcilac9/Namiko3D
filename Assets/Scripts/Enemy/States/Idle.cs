@@ -23,6 +23,12 @@ public class Idle : State
     public override void Update()
     {
         anim.SetTrigger("Idle");
+
+        if (player == null)
+        {
+            return;
+        }
+
         if (isChangingState)
         {
             changeTimer -= Time.deltaTime;

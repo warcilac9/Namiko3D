@@ -27,10 +27,4 @@ public class originForward : MonoBehaviour
             transform.Rotate(0, 180, 0, Space.Self);
         }
     }
-
-    // Optional helper for bullet spawn direction
-    public Vector3 GetFireDirection()
-    {
-        return transform.right;
-    }
 }
