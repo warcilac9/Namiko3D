@@ -8,21 +8,73 @@ public class AttackManager : MonoBehaviour
     public float comboTimeout = 1.5f;
     public float afterComboCD = 0.5f;
     public int attackCount = 0;
+    [SerializeField] GameObject punchHitbox;
+    [SerializeField] GameObject kickHitbox;
+    [SerializeField] float punchActiveTime = 0.06f;
+    [SerializeField] float kickActiveTime = 0.06f;
     float comboTimer = 0f;
     bool canAttack = true;
     bool inComboCooldown = false;
+    Coroutine punchHitboxCoroutine;
+    Coroutine kickHitboxCoroutine;
     [SerializeField] PoolManager poolManager;
     [SerializeField] Transform originTransform;
 
     public InputHandler inputHandler;
 
+    void Awake()
+    {
+        if (inputHandler == null)
+        {
+            inputHandler = FindFirstObjectByType<InputHandler>();
+        }
+
+        if (punchHitbox == null)
+        {
+            punchHitbox = FindChildByName(transform, "punchHitbox");
+        }
+
+        if (kickHitbox == null)
+        {
+            kickHitbox = FindChildByName(transform, "kickHItbox");
+        }
+    }
+
     void OnEnable()
     {
-        inputHandler.typeAttack += addPunch;
+        if (inputHandler != null)
+        {
+            inputHandler.typeAttack += addPunch;
+        }
     }
     void OnDisable()
     {
-        inputHandler.typeAttack -= addPunch;
+        if (inputHandler != null)
+        {
+            inputHandler.typeAttack -= addPunch;
+        }
+
+        if (punchHitboxCoroutine != null)
+        {
+            StopCoroutine(punchHitboxCoroutine);
+            punchHitboxCoroutine = null;
+        }
+
+        if (kickHitboxCoroutine != null)
+        {
+            StopCoroutine(kickHitboxCoroutine);
+            kickHitboxCoroutine = null;
+        }
+
+        if (punchHitbox != null)
+        {
+            punchHitbox.SetActive(false);
+        }
+
+        if (kickHitbox != null)
+        {
+            kickHitbox.SetActive(false);
+        }
     }
 
     void Update()
@@ -102,9 +154,11 @@ public class AttackManager : MonoBehaviour
         {
             case 0:
                 attackPhase = 1;
+                TriggerPunchHitbox();
                 break;
             case 1:
                 attackPhase = 2;
+                TriggerKickHitbox();
                 break;
             case 2:
                 attackPhase = 3;
@@ -114,5 +168,64 @@ public class AttackManager : MonoBehaviour
                 attackPhase = 0;
                 break;
         }
+    }
+
+    void TriggerPunchHitbox()
+    {
+        if (punchHitbox == null)
+        {
+            return;
+        }
+
+        if (punchHitboxCoroutine != null)
+        {
+            StopCoroutine(punchHitboxCoroutine);
+        }
+
+        punchHitboxCoroutine = StartCoroutine(EnableHitboxTemporarily(punchHitbox, punchActiveTime, true));
+    }
+
+    void TriggerKickHitbox()
+    {
+        if (kickHitbox == null)
+        {
+            return;
+        }
+
+        if (kickHitboxCoroutine != null)
+        {
+            StopCoroutine(kickHitboxCoroutine);
+        }
+
+        kickHitboxCoroutine = StartCoroutine(EnableHitboxTemporarily(kickHitbox, kickActiveTime, false));
+    }
+
+    IEnumerator EnableHitboxTemporarily(GameObject hitbox, float activeTime, bool isPunch)
+    {
+        hitbox.SetActive(true);
+        yield return new WaitForSeconds(activeTime);
+        hitbox.SetActive(false);
+
+        if (isPunch)
+        {
+            punchHitboxCoroutine = null;
+        }
+        else
+        {
+            kickHitboxCoroutine = null;
+        }
+    }
+
+    static GameObject FindChildByName(Transform root, string childName)
+    {
+        foreach (Transform child in root.GetComponentsInChildren<Transform>(true))
+        {
+            if (child.name == childName)
+            {
+                return child.gameObject;
+            }
+        }
+
+        return null;
     }
 }

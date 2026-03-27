@@ -41,19 +41,22 @@ public class Pursue : State
             return; // Don't execute the rest while changing
         }
 
-        if (Vector3.Distance(npc.transform.position, player.position) > 2)
+        if (Vector3.Distance(npc.transform.position, player.position) > 3)
         {
             Debug.Log("Following player");
 
             List<GameObject> checkpoints = EnemyDestSingleton.Singleton.Checkpoints;
-        
-            if (checkpoints.Count == 0) return;
 
-            GameObject closestCheckpoint = checkpoints[0];
-            float closestDistance = Vector3.Distance(npc.transform.position, checkpoints[0].transform.position);
+            GameObject closestCheckpoint = null;
+            float closestDistance = float.MaxValue;
 
-            for (int i = 1; i < checkpoints.Count; i++)
+            for (int i = 0; i < checkpoints.Count; i++)
             {
+                if (checkpoints[i] == null)
+                {
+                    continue;
+                }
+
                 float distance = Vector3.Distance(npc.transform.position, checkpoints[i].transform.position);
                 if (distance < closestDistance)
                 {
@@ -62,11 +65,13 @@ public class Pursue : State
                 }
             }
 
+            if (closestCheckpoint == null) return;
+
             agent.SetDestination(closestCheckpoint.transform.position);
         }
         else
         {
-            if (Random.Range(0, 100) < 10)
+            if (Random.Range(0, 100) < 20)
             {
                 Debug.Log("Player in range, attacking after cooldown");
                 nextStateType = STATE.ATTACK;

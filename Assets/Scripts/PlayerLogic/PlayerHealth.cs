@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour, iDamageable
     public InputHandler inputHandler;
     public Image healthBar;
 
-    public int health = 100;
+    public float health = 100;
     public float iFrameSec;
     public float stun;
     public bool canRecieveDmg = true;
@@ -36,7 +36,7 @@ public class PlayerHealth : MonoBehaviour, iDamageable
         }
     }
 
-    public void receiveDamage(int amount)
+    public void receiveDamage(float amount)
     {
         if(health > 0 && canRecieveDmg)
         {

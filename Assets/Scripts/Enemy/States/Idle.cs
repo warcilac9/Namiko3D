@@ -47,14 +47,14 @@ public class Idle : State
         }
         else
         {
-            if (Random.Range(0, 100) < 1 && Vector3.Distance(npc.transform.position, player.position) > 2)
+            if (Random.Range(0, 100) < 1 && Vector3.Distance(npc.transform.position, player.position) > 3)
             {
                 Debug.Log("Starting to follow player after cooldown");
                 nextStateType = STATE.PURSUE;
                 isChangingState = true;
                 changeTimer = Random.Range(minCooldown, maxCooldown);
             }
-            else if (Random.Range(0, 100) < 1 && Vector3.Distance(npc.transform.position, player.position) < 2)
+            else if (Random.Range(0, 100) < 10 && Vector3.Distance(npc.transform.position, player.position) < 3)
             {
                 Debug.Log("Starting to attack player after cooldown");
                 nextStateType = STATE.ATTACK;

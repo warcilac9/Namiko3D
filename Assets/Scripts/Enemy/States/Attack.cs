@@ -41,7 +41,7 @@ public class Attack : State
 
         if (!isChangingState)
         {
-            if (Vector3.Distance(npc.transform.position, player.position) > 2)
+            if (Vector3.Distance(npc.transform.position, player.position) > 3)
             {
                 nextStateType = STATE.PURSUE;
                 Debug.Log("Attack finished, will transition to pursue after cooldown");

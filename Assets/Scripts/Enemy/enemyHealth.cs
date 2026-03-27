@@ -3,9 +3,9 @@ using System;
 
 public class enemyHealth : MonoBehaviour, iDamageable
 {
-    private int health;
+    private float health;
     [SerializeField] private Animator animator;
-    public int MaxHealth = 30;
+    public float MaxHealth = 30;
     public Collider hitBox;
     public event Action<enemyHealth> OnEnemyDefeated;
     
@@ -22,7 +22,7 @@ public class enemyHealth : MonoBehaviour, iDamageable
             receiveDamage(damageDealer.damage);
         }
     }
-    public void receiveDamage(int amount)
+    public void receiveDamage(float amount)
     {
         if (health > 0)
         {

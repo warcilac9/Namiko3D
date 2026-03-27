@@ -6,7 +6,7 @@ using UnityEngine;
 public class PoolManager : MonoBehaviour
 {
     [SerializeField] private GameObject Prefab;
-    private int poolSize = 10;
+    private int poolSize = 3;
     [SerializeField] private List<GameObject> bulletList;
     [SerializeField] Transform origin;
     [SerializeField] private SpriteHandler spriteHandler;

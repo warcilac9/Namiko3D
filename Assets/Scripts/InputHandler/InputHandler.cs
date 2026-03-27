@@ -12,9 +12,14 @@ Vector2 movementValue = Vector2.zero;
 [HideInInspector]public float moveValX;
 [HideInInspector]public float moveValY;
 
+    void Update()
+    {
+        Debug.Log("X: " + moveValX);
+        Debug.Log("Y: " + moveValY);
+    }
 
 
-public delegate void Movement();
+    public delegate void Movement();
 public Movement moving;
 
 public delegate void Jumped();

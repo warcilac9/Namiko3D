@@ -3045,6 +3045,11 @@ MonoBehaviour:
   origin: {fileID: 17722362}
   spriteHandler: {fileID: 1201637542}
   mainCamera: {fileID: 0}
+--- !u!95 &2027065593 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3229040961012400934, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+  m_PrefabInstance: {fileID: 5126479969545549520}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2028070751
 GameObject:
   m_ObjectHideFlags: 0
@@ -3269,6 +3274,10 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5713576388026729245, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 6480126663363879441, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -3281,6 +3290,10 @@ PrefabInstance:
       propertyPath: inputHandler
       value: 
       objectReference: {fileID: 42279597}
+    - target: {fileID: 6488552018304684843, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+      propertyPath: animatorNamiko
+      value: 
+      objectReference: {fileID: 2027065593}
     - target: {fileID: 7207579662003638877, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
       propertyPath: mainCamera
       value: 

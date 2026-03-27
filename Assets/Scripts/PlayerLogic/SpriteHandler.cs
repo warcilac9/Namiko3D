@@ -8,7 +8,7 @@ public class SpriteHandler : MonoBehaviour
     [SerializeField] Camera mainCamera;
     public bool isRight;
     
-    private float flipThreshold = 0.1f;
+    [SerializeField]private float flipThreshold = 0.1f;
 
     void Update()
     {
