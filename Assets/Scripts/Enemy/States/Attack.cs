@@ -28,7 +28,6 @@ public class Attack : State
         if (!hasAttacked)
         {
             anim.SetTrigger("Attack");
-            Debug.Log("Attacking once");
             hasAttacked = true;
             return;
         }
@@ -44,12 +43,10 @@ public class Attack : State
             if (Vector3.Distance(npc.transform.position, player.position) > 3)
             {
                 nextStateType = STATE.PURSUE;
-                Debug.Log("Attack finished, will transition to pursue after cooldown");
             }
             else
             {
                 nextStateType = STATE.IDLE;
-                Debug.Log("Attack done, will transition to idle after cooldown");
             }
 
             isChangingState = true;

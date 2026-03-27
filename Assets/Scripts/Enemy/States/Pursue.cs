@@ -7,6 +7,8 @@ public class Pursue : State
     private bool isChangingState = false;
     private float changeTimer = 0f;
     private STATE nextStateType;
+    private float recalculatePathTimer = 0.5f;
+    private float timeSinceLastRecalculation = 0f;
 
     public Pursue(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, float _minCooldown, float _maxCooldown, float _attackDuration) : base(_npc, _agent, _anim, _player, _minCooldown, _maxCooldown, _attackDuration)
     {
@@ -19,6 +21,7 @@ public class Pursue : State
         base.Enter();
         isChangingState = false;
         changeTimer = 0f;
+        timeSinceLastRecalculation = 0f;
     }
     public override void Update()
     {
@@ -38,49 +41,29 @@ public class Pursue : State
                 }
                 stage = EVENT.EXIT;
             }
-            return; // Don't execute the rest while changing
+            return;
         }
 
         if (Vector3.Distance(npc.transform.position, player.position) > 3)
         {
-            Debug.Log("Following player");
-
-            List<GameObject> checkpoints = EnemyDestSingleton.Singleton.Checkpoints;
-
-            GameObject closestCheckpoint = null;
-            float closestDistance = float.MaxValue;
-
-            for (int i = 0; i < checkpoints.Count; i++)
+            // Only recalculate checkpoint path every 0.5 seconds instead of every frame
+            timeSinceLastRecalculation -= Time.deltaTime;
+            if (timeSinceLastRecalculation <= 0f)
             {
-                if (checkpoints[i] == null)
-                {
-                    continue;
-                }
-
-                float distance = Vector3.Distance(npc.transform.position, checkpoints[i].transform.position);
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    closestCheckpoint = checkpoints[i];
-                }
+                RecalculateCheckpointPath();
+                timeSinceLastRecalculation = recalculatePathTimer;
             }
-
-            if (closestCheckpoint == null) return;
-
-            agent.SetDestination(closestCheckpoint.transform.position);
         }
         else
         {
             if (Random.Range(0, 100) < 20)
             {
-                Debug.Log("Player in range, attacking after cooldown");
                 nextStateType = STATE.ATTACK;
                 isChangingState = true;
                 changeTimer = Random.Range(minCooldown, maxCooldown);
             }
             else
             {
-                Debug.Log("Player in range, waiting after cooldown");
                 nextStateType = STATE.IDLE;
                 isChangingState = true;
                 changeTimer = Random.Range(minCooldown, maxCooldown);
@@ -89,10 +72,37 @@ public class Pursue : State
 
         if (Random.Range(0, 100) < 1)
         {
-            Debug.Log("Waiting a min after cooldown");
             nextStateType = STATE.IDLE;
             isChangingState = true;
             changeTimer = Random.Range(minCooldown, maxCooldown);
+        }
+    }
+
+    private void RecalculateCheckpointPath()
+    {
+        List<GameObject> checkpoints = EnemyDestSingleton.Singleton.Checkpoints;
+        if (checkpoints == null || checkpoints.Count == 0)
+            return;
+
+        GameObject closestCheckpoint = null;
+        float closestDistance = float.MaxValue;
+
+        for (int i = 0; i < checkpoints.Count; i++)
+        {
+            if (checkpoints[i] == null)
+                continue;
+
+            float distance = Vector3.Distance(npc.transform.position, checkpoints[i].transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestCheckpoint = checkpoints[i];
+            }
+        }
+
+        if (closestCheckpoint != null)
+        {
+            agent.SetDestination(closestCheckpoint.transform.position);
         }
     }
     public override void Exit()

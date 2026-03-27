@@ -11,6 +11,7 @@ public class PoolManager : MonoBehaviour
     [SerializeField] Transform origin;
     [SerializeField] private SpriteHandler spriteHandler;
     [SerializeField] private Camera mainCamera;
+    private bool isPoolInitialized = false;
 
     void Start()
     {
@@ -22,7 +23,20 @@ public class PoolManager : MonoBehaviour
         {
             mainCamera = Camera.main;
         }
-        AddObjectsToPool(poolSize);
+        // Don't initialize pool at startup - do it lazily when needed
+    }
+
+    private void EnsurePoolInitialized()
+    {
+        if (!isPoolInitialized)
+        {
+            if (bulletList == null)
+            {
+                bulletList = new List<GameObject>();
+            }
+            AddObjectsToPool(poolSize);
+            isPoolInitialized = true;
+        }
     }
 
     private void AddObjectsToPool(int amount)
@@ -38,6 +52,8 @@ public class PoolManager : MonoBehaviour
 
     public GameObject RequesObject(Transform position)
     {
+        EnsurePoolInitialized();
+        
         for (int i = 0; i < bulletList.Count; i++)
         {
             if (!bulletList[i].activeSelf)

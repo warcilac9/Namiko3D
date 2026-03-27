@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemyHealth
   animator: {fileID: 140723836746063711}
-  MaxHealth: 30
+  MaxHealth: 50
   hitBox: {fileID: 4134610683553649603}
 --- !u!1 &7697933147642948649
 GameObject:

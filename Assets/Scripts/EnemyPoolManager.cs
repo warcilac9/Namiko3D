@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+// ========== TEMPORARY: Remove when feature is no longer needed ==========
+using UnityEngine.SceneManagement;
+// =========================================================================
 
 
 public class EnemyPoolManager : MonoBehaviour
@@ -16,6 +19,18 @@ public class EnemyPoolManager : MonoBehaviour
     private int maxActiveEnemies;
     private bool allEnemiesDefeatedLogged;
     private Transform currentWaveSpawnPoint;
+    private bool isPoolInitialized = false;
+
+    [Header("[ TEMPORARY: Easy to Remove Later ]")]
+    [SerializeField] private bool isLastHorde = false;
+    [SerializeField] private string mainMenuSceneName = "MainMenu";
+
+    // ========== TEMPORARY: Remove when feature is no longer needed ==========
+    public void SetIsLastHorde(bool value)
+    {
+        isLastHorde = value;
+    }
+    // =========================================================================
 
     void Start()
     {
@@ -29,7 +44,7 @@ public class EnemyPoolManager : MonoBehaviour
             origin = transform;
         }
 
-        AddObjectsToPool(poolSize);
+        // Don't initialize pool at startup - do it lazily when needed
     }
 
     private void AddObjectsToPool(int amount)
@@ -45,6 +60,8 @@ public class EnemyPoolManager : MonoBehaviour
 
     public void StartWave(int enemiesToSpawn, int maxEnemies, Transform spawnPoint = null)
     {
+        EnsurePoolInitialized();
+        
         allEnemiesDefeatedLogged = false;
         pendingEnemies = Mathf.Max(0, enemiesToSpawn);
         activeEnemies = CountActiveEnemies();
@@ -53,6 +70,15 @@ public class EnemyPoolManager : MonoBehaviour
 
         TrySpawnPending(currentWaveSpawnPoint);
         CheckWaveCompletion();
+    }
+
+    private void EnsurePoolInitialized()
+    {
+        if (!isPoolInitialized)
+        {
+            AddObjectsToPool(poolSize);
+            isPoolInitialized = true;
+        }
     }
 
     public GameObject RequesObject(Transform position)
@@ -103,6 +129,14 @@ public class EnemyPoolManager : MonoBehaviour
     public void AllEnemiesDefeated()
     {
         eventSO.Occurred();
+
+        // ========== TEMPORARY: Remove this entire if block when feature is no longer needed ==========
+        // To remove: Delete this entire if statement and the mainMenuSceneName field above
+        if (isLastHorde)
+        {
+            SceneManager.LoadScene(mainMenuSceneName);
+        }
+        // ==============================================================================================
     }
 
     private void TrySpawnPending(Transform spawnPoint)

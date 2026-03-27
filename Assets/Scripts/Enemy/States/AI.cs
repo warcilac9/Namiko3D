@@ -28,18 +28,6 @@ public class AI : MonoBehaviour
 
     void Update()
     {
-        if (player == null)
-        {
-            TryResolvePlayer();
-            if (player == null)
-            {
-                return;
-            }
-
-            // Player was found later; initialize state machine now.
-            currentState = new Idle(gameObject, agent, anim, player, minCooldown, maxCooldown, attackDuration);
-        }
-
         if (currentState == null)
         {
             currentState = new Idle(gameObject, agent, anim, player, minCooldown, maxCooldown, attackDuration);

@@ -6,6 +6,8 @@ public class EnemyMovement : MonoBehaviour
 {
     public Transform playerTarget;
     private NavMeshAgent navAgent;
+    private float recalculatePathTimer = 0.5f;
+    private float timeSinceLastRecalculation = 0f;
 
     void Start()
     {
@@ -14,22 +16,29 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        moveEnemy();
+        // Only recalculate path periodically (every 0.5 seconds) instead of every frame
+        timeSinceLastRecalculation -= Time.fixedDeltaTime;
+        if (timeSinceLastRecalculation <= 0f)
+        {
+            moveEnemy();
+            timeSinceLastRecalculation = recalculatePathTimer;
+        }
     }
 
     public void moveEnemy()
     {
         List<GameObject> checkpoints = EnemyDestSingleton.Singleton.Checkpoints;
+        if (checkpoints == null || checkpoints.Count == 0)
+            return;
 
         GameObject closestCheckpoint = null;
         float closestDistance = float.MaxValue;
 
-        for (int i = 1; i < checkpoints.Count; i++)
+        // Only check checkpoints, not every frame
+        for (int i = 0; i < checkpoints.Count; i++)
         {
             if (checkpoints[i] == null)
-            {
                 continue;
-            }
 
             float distance = Vector3.Distance(transform.position, checkpoints[i].transform.position);
             if (distance < closestDistance)
@@ -39,18 +48,9 @@ public class EnemyMovement : MonoBehaviour
             }
         }
 
-        if (checkpoints.Count > 0 && checkpoints[0] != null)
+        if (closestCheckpoint != null)
         {
-            float distance = Vector3.Distance(transform.position, checkpoints[0].transform.position);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closestCheckpoint = checkpoints[0];
-            }
+            navAgent.SetDestination(closestCheckpoint.transform.position);
         }
-
-        if (closestCheckpoint == null) return;
-
-        navAgent.SetDestination(closestCheckpoint.transform.position);
     }
 }

@@ -24,11 +24,6 @@ public class AttackManager : MonoBehaviour
 
     void Awake()
     {
-        if (inputHandler == null)
-        {
-            inputHandler = FindFirstObjectByType<InputHandler>();
-        }
-
         if (punchHitbox == null)
         {
             punchHitbox = FindChildByName(transform, "punchHitbox");
@@ -42,6 +37,11 @@ public class AttackManager : MonoBehaviour
 
     void OnEnable()
     {
+        if (inputHandler == null)
+        {
+            inputHandler = FindFirstObjectByType<InputHandler>();
+        }
+        
         if (inputHandler != null)
         {
             inputHandler.typeAttack += addPunch;

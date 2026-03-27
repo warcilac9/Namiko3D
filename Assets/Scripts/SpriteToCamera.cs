@@ -14,8 +14,11 @@ public class SpriteToCamera : MonoBehaviour
         }
     }
     
-    void FixedUpdate()
+    void LateUpdate()
     {
+        if (mainCamera == null)
+            return;
+
         Vector3 directionToCamera = mainCamera.transform.position - transform.position;
         
         if (directionToCamera != Vector3.zero)
