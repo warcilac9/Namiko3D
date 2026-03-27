@@ -10220,9 +10220,10 @@ MonoBehaviour:
   comboTimeout: 1
   afterComboCD: 0.5
   attackCount: 0
-  transformation: {fileID: 0}
   punchHitbox: {fileID: 0}
-  transformedPunchActiveTime: 0.06
+  kickHitbox: {fileID: 0}
+  punchActiveTime: 0.06
+  kickActiveTime: 0.06
   poolManager: {fileID: 0}
   originTransform: {fileID: 4946894114030574109}
   inputHandler: {fileID: 0}
@@ -10275,6 +10276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Transformation
   inputHandler: {fileID: 0}
   namikoSprite: {fileID: 5770739945595466313}
+  HeartParticles: {fileID: 5678964255216150956}
   isTransforming: 0
   isTransformed: 0
   transformDuration: 6

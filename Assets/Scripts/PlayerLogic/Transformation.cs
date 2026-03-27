@@ -4,6 +4,7 @@ public class Transformation : MonoBehaviour
 {
     public InputHandler inputHandler;
     public GameObject namikoSprite;
+    public GameObject HeartParticles;
     public bool isTransforming;
     public bool isTransformed;
     [Min(0f)] public float transformDuration = 6f;
@@ -89,13 +90,16 @@ public class Transformation : MonoBehaviour
         if (animatorNamiko != null && magicalGirlNamiko != null)
         {
             animatorNamiko.runtimeAnimatorController = magicalGirlNamiko;
+            
         }
 
         isTransformed = true;
 
         if (transformDuration > 0f)
         {
+            HeartParticles.gameObject.SetActive(true);
             yield return new WaitForSeconds(transformDuration);
+            
         }
 
         isTransformed = false;
@@ -109,6 +113,7 @@ public class Transformation : MonoBehaviour
         if (animatorNamiko != null && defaultNamikoController != null)
         {
             animatorNamiko.runtimeAnimatorController = defaultNamikoController;
+            HeartParticles.gameObject.SetActive(false);
         }
 
         isTransforming = false;
