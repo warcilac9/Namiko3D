@@ -1,17 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Paralexeffect : MonoBehaviour
 {
-    Material material;
+    private Material material;
     private float distance;
 
     [Range(0f,0.5f)]
     public float speed;
-
+    
     
     void Start()
     {
+        
         material = GetComponent<Renderer>().material;
+
     }
 
     // Update is called once per frame
