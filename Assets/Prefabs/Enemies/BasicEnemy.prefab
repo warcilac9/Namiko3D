@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3092ff5b935aaf247a414ff3f5754cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::damagePlayer
-  damage: 50
+  damage: 10
 --- !u!1 &6803973653747788385
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,6 +119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteToCamera
   mainCamera: {fileID: 0}
+  isBullet: 0
+  bulletTag: Bullet
 --- !u!54 &3606876112405218786
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -238,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef3cefdc2a5f274c934fba2763aa533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemyHealth
+  animator: {fileID: 140723836746063711}
   MaxHealth: 30
   hitBox: {fileID: 4134610683553649603}
 --- !u!1 &7697933147642948649

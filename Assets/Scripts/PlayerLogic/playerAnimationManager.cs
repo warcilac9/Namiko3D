@@ -9,6 +9,7 @@ public class playerAnimationManager : MonoBehaviour
     public GameObject playerGameObject;
     public InputHandler inputHandler;
     public AttackManager attackManager;
+    public PlayerHealth playerHealth;
 
     public int counter = 0;
     private int lastAttackPhase = 0;
@@ -16,11 +17,13 @@ public class playerAnimationManager : MonoBehaviour
     void OnEnable()
     {
         inputHandler.moving += moveAnimation;
+        playerHealth.onHurt += HurtAnimation;
     }
 
     void OnDisable()
     {
         inputHandler.moving -= moveAnimation;
+        playerHealth.onHurt -= HurtAnimation;
     }
 
     private void moveAnimation()
@@ -29,6 +32,11 @@ public class playerAnimationManager : MonoBehaviour
         {
             animator.SetBool("isWalking", true);
         }
+    }
+
+    private void HurtAnimation()
+    {
+        animator.SetTrigger("IsHurt");
     }
 
     void Update()

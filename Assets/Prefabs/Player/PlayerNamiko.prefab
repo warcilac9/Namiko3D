@@ -10235,6 +10235,7 @@ MonoBehaviour:
   playerGameObject: {fileID: 8043028128659256610}
   inputHandler: {fileID: 0}
   attackManager: {fileID: 7598503623062253141}
+  playerHealth: {fileID: 0}
   counter: 0
 --- !u!114 &1781130064939170407
 MonoBehaviour:
@@ -10283,7 +10284,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7643c14a503784bbd6660a5b6744d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  inputHandler: {fileID: 0}
   health: 100
+  iFrameSec: 0
+  stun: 0
+  canRecieveDmg: 1
   hitBox: {fileID: 710412057575030953}
 --- !u!1 &8528388031542603924
 GameObject:

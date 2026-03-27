@@ -3,10 +3,12 @@ using System;
 
 public class enemyHealth : MonoBehaviour, iDamageable
 {
-    int health;
+    private int health;
+    [SerializeField] private Animator animator;
     public int MaxHealth = 30;
     public Collider hitBox;
     public event Action<enemyHealth> OnEnemyDefeated;
+    
 
     void Awake()
     {
@@ -26,6 +28,8 @@ public class enemyHealth : MonoBehaviour, iDamageable
         {
             health = health - amount;
             checkLife();
+            animator.SetTrigger("IsTrigger");
+
         } 
     }
     void checkLife()
