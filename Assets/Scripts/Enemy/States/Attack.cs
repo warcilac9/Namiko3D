@@ -17,6 +17,7 @@ public class Attack : State
     public override void Enter()
     {
         base.Enter();
+        Debug.Log(name);
         isChangingState = false;
         changeTimer = 0f;
         attackTimer = attackDuration;
