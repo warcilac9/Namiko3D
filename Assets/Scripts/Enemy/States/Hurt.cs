@@ -4,7 +4,6 @@ using UnityEngine.AI;
 public class Hurt : State
 {
     private bool isChangingState = false;
-    private STATE nextStateType;
     private bool hasReceivedDamage = false;
     private float changeTimer = 0f;
     private float stunDuration;
@@ -17,6 +16,7 @@ public class Hurt : State
 
     public override void Enter()
     {
+        agent.isStopped = true;
         base.Enter();
         Debug.Log(name);
         isChangingState = false;
@@ -42,7 +42,7 @@ public class Hurt : State
 
         if (!isChangingState)
         {
-            nextStateType = STATE.IDLE;
+            isChangingState = true;
             changeTimer = Random.Range(minCooldown, maxCooldown);
             return;
         }
@@ -53,6 +53,7 @@ public class Hurt : State
             if(changeTimer <= 0f)
             {
                 nextState = new Idle(npc, agent, anim, player, minCooldown, maxCooldown, attackDuration);
+                stage = EVENT.EXIT;
             }
         }
 
@@ -61,6 +62,7 @@ public class Hurt : State
     public override void Exit()
     {
         anim.ResetTrigger("IsHurt");
+        agent.isStopped = false;
         base.Exit();
     }
 }

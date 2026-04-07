@@ -7,11 +7,13 @@ public class enemyHealth : MonoBehaviour, iDamageable
     public float MaxHealth = 30;
     public Collider hitBox;
     public event Action<enemyHealth> OnEnemyDefeated;
+    private AI ai;
     
 
     void Awake()
     {
         health = MaxHealth;
+        ai = GetComponent<AI>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -27,6 +29,10 @@ public class enemyHealth : MonoBehaviour, iDamageable
         {
             health = health - amount;
             checkLife();
+            if (health > 0 && ai != null)
+            {
+                ai.TriggerHurt();
+            }
         } 
     }
     void checkLife()

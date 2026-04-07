@@ -26,6 +26,11 @@ public class AI : MonoBehaviour
         }
     }
 
+    public void TriggerHurt()
+    {
+        currentState = new Hurt(gameObject, agent, anim, player, minCooldown, maxCooldown, attackDuration);
+    }
+
     void Update()
     {
         if (currentState == null)
