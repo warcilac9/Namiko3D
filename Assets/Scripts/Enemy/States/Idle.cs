@@ -16,6 +16,7 @@ public class Idle : State
     {
         agent.isStopped = true;
         base.Enter();
+        Debug.Log(name);
         isChangingState = false;
         changeTimer = 0f;
     }
