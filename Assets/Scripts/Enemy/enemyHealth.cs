@@ -28,7 +28,7 @@ public class enemyHealth : MonoBehaviour, iDamageable
         {
             health = health - amount;
             checkLife();
-            animator.SetTrigger("IsTrigger");
+            animator.SetTrigger("IsHurt");
 
         } 
     }
