@@ -9,9 +9,12 @@ public class enemyHealth : MonoBehaviour, iDamageable
 
     [Header("Damage Reaction")]
     [SerializeField] private float defaultHurtDuration = 0.4f;
+    [SerializeField] private float duplicateHitGraceSeconds = 0.08f;
 
     private float health;
     private bool pendingDeathFinalization;
+    private damageDealer lastDamageDealer;
+    private float lastDamageTime;
     
     public event Action<enemyHealth> OnEnemyDefeated;
     public event Action<EnemyDamagePayload> OnDamageReceived;
@@ -30,6 +33,13 @@ public class enemyHealth : MonoBehaviour, iDamageable
     {
         if(other.TryGetComponent<damageDealer>(out var dealer))
         {
+            if (dealer == lastDamageDealer && Time.time - lastDamageTime < duplicateHitGraceSeconds)
+            {
+                return;
+            }
+
+            lastDamageDealer = dealer;
+            lastDamageTime = Time.time;
             receiveDamage(dealer.damage);
         }
     }
@@ -70,6 +80,8 @@ public class enemyHealth : MonoBehaviour, iDamageable
     {
         health = MaxHealth;
         pendingDeathFinalization = false;
+        lastDamageDealer = null;
+        lastDamageTime = -999f;
     }
 
 

@@ -28,6 +28,11 @@ public class AI : MonoBehaviour
 
     void OnEnable()
     {
+        if (agent == null)
+        {
+            agent = GetComponent<NavMeshAgent>();
+        }
+
         if(health == null)
         {
             health = GetComponent<enemyHealth>();
@@ -42,6 +47,16 @@ public class AI : MonoBehaviour
         hasPendingDamage = false;
         hasPendingLethalDamage = false;
         pendingDamage = null;
+
+        if (agent != null)
+        {
+            agent.ResetPath();
+            agent.isStopped = false;
+        }
+
+        currentState = null;
+        TryResolvePlayer();
+        EnsureStartingState();
     }
 
     void OnDisable()
