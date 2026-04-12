@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using Unity.Cinemachine;
 
 public class PlayerHealth : MonoBehaviour, iDamageable
 {
@@ -16,13 +15,7 @@ public class PlayerHealth : MonoBehaviour, iDamageable
     public Collider hitBox;
     public event Action onHurt;
 
-    public delegate void Shake(CinemachineImpulseSource impulseSource);
-    public Shake onCameraShake;
-
     public event Action onDeath;
-
-    public CinemachineImpulseSource impulseSource;    
-
 
     void OnTriggerEnter(Collider other)
     {
@@ -47,8 +40,6 @@ public class PlayerHealth : MonoBehaviour, iDamageable
     {
         if(health > 0 && canRecieveDmg)
         {
-            
-            Debug.Log("Received "+amount+" damage");
             health = health - amount;
             healthBar.fillAmount = health / 100f;
             StartCoroutine(iFrame());
@@ -65,14 +56,12 @@ public class PlayerHealth : MonoBehaviour, iDamageable
     }
     IEnumerator iFrame()
     {
-        onCameraShake?.Invoke(impulseSource);
         canRecieveDmg = false;
         yield return new WaitForSeconds(iFrameSec);
         canRecieveDmg = true;
     }
     IEnumerator CanMove()
     {
-        
         inputHandler.moveValX = 0;
         inputHandler.moveValY = 0;
         inputHandler.gameObject.SetActive(false);
