@@ -4,7 +4,7 @@ using System.Collections;
 
 public class InputHandler : MonoBehaviour
 {
-PlayerInput input;
+public PlayerInput input;
 
 [Header("MoveValues")]
 Vector2 movementValue = Vector2.zero;
@@ -12,9 +12,13 @@ Vector2 movementValue = Vector2.zero;
 [HideInInspector]public float moveValX;
 [HideInInspector]public float moveValY;
 
+    public delegate void PauseGame();
+    public PauseGame pauseGame;
+    public delegate void UnPauseGame();
+    public UnPauseGame unPauseGame;
 
 
-    public delegate void Movement();
+public delegate void Movement();
 public Movement moving;
 
 public delegate void Jumped();
@@ -82,7 +86,21 @@ public void Punch(InputAction.CallbackContext context)
             typeAttack?.Invoke(punchID);
         }
     }
-
+public void OpenMenu(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            pauseGame?.Invoke();
+        }
+    }
+public void CloseMenu(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            unPauseGame?.Invoke();
+        }
+    }
 }
+
 
 

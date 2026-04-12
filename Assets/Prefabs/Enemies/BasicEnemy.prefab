@@ -243,6 +243,8 @@ MonoBehaviour:
   MaxHealth: 30
   hitBox: {fileID: 4134610683553649603}
   defaultHurtDuration: 1
+  duplicateHitGraceSeconds: 0.08
+  pSHurt: {fileID: 1123454242542903204}
 --- !u!1 &7697933147642948649
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +374,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 874788661856859134, guid: 6fdd028c8ca746a4c8066d5f2e867645, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 874788661856859134, guid: 6fdd028c8ca746a4c8066d5f2e867645, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 3
       objectReference: {fileID: 0}
@@ -421,13 +427,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4539505747845932408, guid: 6fdd028c8ca746a4c8066d5f2e867645, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fdd028c8ca746a4c8066d5f2e867645, type: 3}
+--- !u!198 &1123454242542903204 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 874788661856859134, guid: 6fdd028c8ca746a4c8066d5f2e867645, type: 3}
+  m_PrefabInstance: {fileID: 266996647788588122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2848913389033750203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2611471693610046177, guid: 6fdd028c8ca746a4c8066d5f2e867645, type: 3}

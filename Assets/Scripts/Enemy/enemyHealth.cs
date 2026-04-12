@@ -10,6 +10,7 @@ public class enemyHealth : MonoBehaviour, iDamageable
     [Header("Damage Reaction")]
     [SerializeField] private float defaultHurtDuration = 0.4f;
     [SerializeField] private float duplicateHitGraceSeconds = 0.08f;
+    [SerializeField] private ParticleSystem pSHurt;
 
     private float health;
     private bool pendingDeathFinalization;
@@ -52,6 +53,7 @@ public class enemyHealth : MonoBehaviour, iDamageable
         } 
 
         health -= dmgAmount;
+        pSHurt.Play();
         bool isLethal = health <= 0f;
         Debug.Log($"[{gameObject.name}] health remaining: {health}/{MaxHealth}", this);
 

@@ -9,6 +9,7 @@ public class AI : MonoBehaviour
 
     public Animator anim;
     public Transform player;
+    
 
     private State currentState;
 
@@ -119,6 +120,8 @@ public class AI : MonoBehaviour
             
             hasPendingDamage = false;
             pendingDamage = null;
+
+            
     }
 
     private bool CanConsumePendingDamage()
