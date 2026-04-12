@@ -13,6 +13,7 @@ public class enemyHealth : MonoBehaviour, iDamageable
 
     private float health;
     private bool pendingDeathFinalization;
+    private bool canReceiveDamage;
     private damageDealer lastDamageDealer;
     private float lastDamageTime;
     
@@ -45,7 +46,7 @@ public class enemyHealth : MonoBehaviour, iDamageable
     }
     public void receiveDamage(float dmgAmount)
     {
-        if (health <= 0f)
+        if (!canReceiveDamage || health <= 0f)
         {
             return;
         } 
@@ -76,10 +77,16 @@ public class enemyHealth : MonoBehaviour, iDamageable
         gameObject.SetActive(false);
     }
 
+    public void SetCanReceiveDamage(bool value)
+    {
+        canReceiveDamage = value;
+    }
+
     private void ResetHealthState()
     {
         health = MaxHealth;
         pendingDeathFinalization = false;
+        canReceiveDamage = true;
         lastDamageDealer = null;
         lastDamageTime = -999f;
     }

@@ -11,6 +11,7 @@ public class Hurt : State
     private float hurtTimer;
 
     private AI ai;
+    private enemyHealth health;
 
     public Hurt(
         GameObject _npc,
@@ -28,6 +29,7 @@ public class Hurt : State
         hurtDuration = _hurtDuration;
         endsInDeathFinalization = _endsInDeathFinalization;
         ai = _npc.GetComponent<AI>();
+        health = _npc.GetComponent<enemyHealth>();
     }
 
     public override void Enter()
@@ -43,6 +45,8 @@ public class Hurt : State
         {
             anim.SetBool("isWalking", false);
         }
+
+        health?.SetCanReceiveDamage(false);
 
         hasTriggeredHurtAnimation = false;
         hasHandledCompletion = false;
@@ -95,6 +99,8 @@ public class Hurt : State
 
     public override void Exit()
     {
+        health?.SetCanReceiveDamage(true);
+
         if (anim != null)
         {
             anim.ResetTrigger("IsHurt");
