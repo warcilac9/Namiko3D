@@ -240,9 +240,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef3cefdc2a5f274c934fba2763aa533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemyHealth
-  animator: {fileID: 140723836746063711}
-  MaxHealth: 50
+  MaxHealth: 30
   hitBox: {fileID: 4134610683553649603}
+  defaultHurtDuration: 1
 --- !u!1 &7697933147642948649
 GameObject:
   m_ObjectHideFlags: 0

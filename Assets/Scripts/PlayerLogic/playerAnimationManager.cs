@@ -59,15 +59,12 @@ public class playerAnimationManager : MonoBehaviour
         {
             case 1:
                 animator.SetTrigger("Punch");
-                Debug.Log("Should be punching");
                 break;
             case 2:
                 animator.SetTrigger("Kick");
-                Debug.Log("Should be Kicking");
                 break;
             case 3:
                 animator.SetTrigger("Magic");
-                Debug.Log("Should be Magic");
                 break;
             default:
                 break;

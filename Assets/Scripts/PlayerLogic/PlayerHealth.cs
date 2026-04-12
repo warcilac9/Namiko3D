@@ -40,7 +40,6 @@ public class PlayerHealth : MonoBehaviour, iDamageable
     {
         if(health > 0 && canRecieveDmg)
         {
-            Debug.Log("Received "+amount+" damage");
             health = health - amount;
             healthBar.fillAmount = health / 100f;
             StartCoroutine(iFrame());

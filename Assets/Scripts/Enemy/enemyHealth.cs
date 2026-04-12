@@ -3,48 +3,73 @@ using System;
 
 public class enemyHealth : MonoBehaviour, iDamageable
 {
-    private float health;
-    [SerializeField] private Animator animator;
+    [Header("Health")]
     public float MaxHealth = 30;
     public Collider hitBox;
-    public event Action<enemyHealth> OnEnemyDefeated;
+
+    [Header("Damage Reaction")]
+    [SerializeField] private float defaultHurtDuration = 0.4f;
+
+    private float health;
+    private bool pendingDeathFinalization;
     
+    public event Action<enemyHealth> OnEnemyDefeated;
+    public event Action<EnemyDamagePayload> OnDamageReceived;
 
     void Awake()
     {
         health = MaxHealth;
     }
 
+    void OnEnable()
+    {
+        ResetHealthState();
+    }
+
     void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent<damageDealer>(out var damageDealer))
+        if(other.TryGetComponent<damageDealer>(out var dealer))
         {
-            receiveDamage(damageDealer.damage);
+            receiveDamage(dealer.damage);
         }
     }
-    public void receiveDamage(float amount)
+    public void receiveDamage(float dmgAmount)
     {
-        if (health > 0)
+        if (health <= 0f)
         {
-            health = health - amount;
-            checkLife();
-            animator.SetTrigger("IsTrigger");
-
+            return;
         } 
-    }
-    void checkLife()
-    {
-        if(health <= 0)
+
+        health -= dmgAmount;
+        bool isLethal = health <= 0f;
+        Debug.Log($"[{gameObject.name}] health remaining: {health}/{MaxHealth}", this);
+
+        EnemyDamagePayload payload = new EnemyDamagePayload(amount: dmgAmount, hurtDuration: defaultHurtDuration, isLethal: isLethal);
+
+        OnDamageReceived?.Invoke(payload);
+
+        if (isLethal)
         {
-            Death();
+            pendingDeathFinalization = true;
         }
     }
 
-    void Death()
+    public void FinalizeDeath()
     {
+        if (!pendingDeathFinalization)
+        {
+            return;
+        }
+
+        pendingDeathFinalization = false;
         OnEnemyDefeated?.Invoke(this);
-        health=MaxHealth;
         gameObject.SetActive(false);
+    }
+
+    private void ResetHealthState()
+    {
+        health = MaxHealth;
+        pendingDeathFinalization = false;
     }
 
 

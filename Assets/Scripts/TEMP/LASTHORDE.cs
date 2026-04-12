@@ -22,7 +22,6 @@ public class LASTHORDE : MonoBehaviour
         {
             hasTriggered = true;
             enemyPoolManager.SetIsLastHorde(true);
-            Debug.Log("LASTHORDE: Last horde flag activated!");
         }
     }
 }
