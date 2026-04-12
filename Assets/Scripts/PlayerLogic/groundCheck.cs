@@ -3,39 +3,44 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class groundCheck : MonoBehaviour
 {
-    [Tooltip("Optional reference to the trigger collider used for ground checks.")]
-    public Collider groundTriggerCollider;
-
     [Tooltip("True when grounded.")]
     public bool isGrounded;
 
     [Tooltip("Layers considered ground for this check.")]
     public LayerMask layerMask;
 
-    private int groundContactCount;
+    [Tooltip("Ray origin is lifted by this amount to avoid starting inside geometry.")]
+    [SerializeField] private float rayOriginOffset = 0.05f;
 
-    void Reset()
-    {
-        groundTriggerCollider = GetComponent<Collider>();
-        if (groundTriggerCollider != null)
-            groundTriggerCollider.isTrigger = true;
-    }
+    [Tooltip("How far below the origin we search for ground.")]
+    [SerializeField] private float groundCheckDistance = 0.2f;
 
-    void OnTriggerEnter(Collider other)
+    [Tooltip("Minimum surface normal Y to count as floor (1 = flat floor, 0 = vertical wall).")]
+    [Range(0f, 1f)]
+    [SerializeField] private float minGroundNormalY = 0.55f;
+
+    void FixedUpdate()
     {
-        if (((1 << other.gameObject.layer) & layerMask) != 0)
+        Vector3 origin = transform.position + Vector3.up * rayOriginOffset;
+        float distance = groundCheckDistance + rayOriginOffset;
+
+        if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, distance, layerMask, QueryTriggerInteraction.Ignore))
         {
-            groundContactCount++;
-            isGrounded = true;
+            isGrounded = hit.normal.y >= minGroundNormalY;
+        }
+        else
+        {
+            isGrounded = false;
         }
     }
 
-    void OnTriggerExit(Collider other)
+    void OnDrawGizmosSelected()
     {
-        if (((1 << other.gameObject.layer) & layerMask) != 0)
-        {
-            groundContactCount = Mathf.Max(groundContactCount - 1, 0);
-            isGrounded = (groundContactCount > 0);
-        }
+        Gizmos.color = isGrounded ? Color.green : Color.red;
+        Vector3 origin = transform.position + Vector3.up * rayOriginOffset;
+        Vector3 end = origin + Vector3.down * (groundCheckDistance + rayOriginOffset);
+
+        Gizmos.DrawLine(origin, end);
+        Gizmos.DrawWireSphere(end, 0.02f);
     }
 }

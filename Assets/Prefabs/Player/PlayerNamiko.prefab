@@ -10171,6 +10171,7 @@ MonoBehaviour:
   input: {fileID: 0}
   _rb: {fileID: 5713576388026729245}
   mainCamera: {fileID: 0}
+  groundCheck: {fileID: 3616200117327293914}
   moveSpeed: 8
 --- !u!114 &2429015408826924780
 MonoBehaviour:
@@ -10457,8 +10458,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c8df7debf23ec49acf3017cf139e56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::groundCheck
-  groundTriggerCollider: {fileID: 5957816239690340803}
   isGrounded: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 8
+  rayOriginOffset: 0.05
+  groundCheckDistance: 0.2
+  minGroundNormalY: 0.55

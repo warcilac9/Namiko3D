@@ -5,6 +5,7 @@ public class MovementHandler : MonoBehaviour
     [SerializeField] InputHandler input;
     [SerializeField] Rigidbody _rb;
     [SerializeField] Camera mainCamera;
+    [SerializeField] groundCheck groundCheck;
 
     public float moveSpeed;
 
@@ -13,7 +14,8 @@ public class MovementHandler : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 cameraForward = mainCamera.transform.forward;
+        if(groundCheck.isGrounded){
+            Vector3 cameraForward = mainCamera.transform.forward;
         cameraForward.y = 0;
         cameraForward.Normalize();
 
@@ -25,6 +27,8 @@ public class MovementHandler : MonoBehaviour
         Vector3 moveVelocity = movementDirection * moveSpeed;
 
         _rb.linearVelocity = new Vector3(moveVelocity.x, _rb.linearVelocity.y, moveVelocity.z);
+        }
+        
     }
 
 }
