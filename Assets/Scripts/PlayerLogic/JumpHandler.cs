@@ -3,28 +3,41 @@ using UnityEngine;
 public class JumpHandler : MonoBehaviour
 {
     public InputHandler inputHandler;
-    [SerializeField] Rigidbody rb;
     public groundCheck groundCheck;
+    private MovementHandler movementHandler;
 
-    public float jumpForce;
-    
+    public float jumpForce = 5f;
+
+    void Awake()
+    {
+        if (inputHandler == null)
+            inputHandler = GetComponent<InputHandler>();
+
+        movementHandler = GetComponent<MovementHandler>();
+        if (movementHandler == null)
+            movementHandler = GetComponentInParent<MovementHandler>();
+
+        if (groundCheck == null)
+            groundCheck = GetComponentInChildren<groundCheck>();
+    }
 
     void OnEnable()
     {
-        inputHandler.jumping += isJump;
+        if (inputHandler != null)
+            inputHandler.jumping += isJump;
     }
+
     void OnDisable()
     {
-        inputHandler.jumping -= isJump;
+        if (inputHandler != null)
+            inputHandler.jumping -= isJump;
     }
 
     public void isJump()
     {
-        if(groundCheck.isGrounded == true)
+        if (groundCheck != null && groundCheck.isGrounded && movementHandler != null)
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.y, jumpForce);
+            movementHandler.ApplyJumpVelocity(jumpForce);
         }
-        
-        
     }
 }

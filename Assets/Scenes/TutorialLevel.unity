@@ -210,8 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputHandler
   input: {fileID: 42279598}
-  moveValX: 0
-  moveValY: 0
+  movementValue: {x: 0, y: 0}
 --- !u!114 &42279598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4390,7 +4389,7 @@ MonoBehaviour:
     DefaultMode: 2
   DefaultBlend:
     Style: 1
-    Time: 2
+    Time: 4
     CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -5348,6 +5347,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
+--- !u!114 &1489745039 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8493930069243562415, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+  m_PrefabInstance: {fileID: 5126479969545549520}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cc990bb011b2a144bf912f96d736290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovementHandler
 --- !u!1001 &1504392515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7905,9 +7915,29 @@ PrefabInstance:
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 1201637534}
+    - target: {fileID: 1000161547221068861, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 36.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000161547221068861, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9376457
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000161547221068861, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.34759253
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000161547221068861, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 40.68
+      objectReference: {fileID: 0}
     - target: {fileID: 1316510524809135197, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
       propertyPath: m_Name
       value: HordeLayouts
+      objectReference: {fileID: 0}
+    - target: {fileID: 1911262894617996998, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2605655576343987426, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7949,6 +7979,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3740114334533774314, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.66
+      objectReference: {fileID: 0}
     - target: {fileID: 3827973230995221057, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
       propertyPath: vcam2
       value: 
@@ -7957,9 +7991,21 @@ PrefabInstance:
       propertyPath: mainVcam
       value: 
       objectReference: {fileID: 1678035148}
+    - target: {fileID: 5547622098132584968, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5892003774519272425, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
       propertyPath: enemiesToSpawn
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021900794231354518, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7531829870497369492, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7714474300949787059, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
       propertyPath: m_IsActive
@@ -8144,6 +8190,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 741176515232122739, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 741176515232122739, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
       propertyPath: inputHandler
       value: 
       objectReference: {fileID: 42279597}
@@ -8152,9 +8202,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1201637543}
     - target: {fileID: 1781130064939170407, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781130064939170407, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
       propertyPath: inputHandler
       value: 
       objectReference: {fileID: 42279597}
+    - target: {fileID: 2429015408826924780, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2429015408826924780, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
       propertyPath: mainCamera
       value: 
@@ -8268,9 +8326,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 42279597}
     - target: {fileID: 8493930069243562415, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+      propertyPath: MoveSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8493930069243562415, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1260867881}
+    - target: {fileID: 8493930069243562415, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 42279598}
     - target: {fileID: 9197435108726206418, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -25.3
@@ -8328,6 +8394,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HordeManagers
       objectReference: {fileID: 0}
+    - target: {fileID: 6037629556185983380, guid: 87a3bce64a57c8247be7b87ea5fddc11, type: 3}
+      propertyPath: movementHandler
+      value: 
+      objectReference: {fileID: 1489745039}
     - target: {fileID: 6360982330211953160, guid: 87a3bce64a57c8247be7b87ea5fddc11, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8367,6 +8437,10 @@ PrefabInstance:
     - target: {fileID: 6360982330211953160, guid: 87a3bce64a57c8247be7b87ea5fddc11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866195010264579432, guid: 87a3bce64a57c8247be7b87ea5fddc11, type: 3}
+      propertyPath: limitActivationDelay
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

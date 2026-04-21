@@ -19,8 +19,6 @@ public class hordeManager : MonoBehaviour
     public void changeToMainCamera()
     {
         mainCame.Priority = 10;
-            hordeCame.Priority = 0;
+        hordeCame.Priority = 0;
     }
-
-
 }
