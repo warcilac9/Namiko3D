@@ -18,6 +18,7 @@ public class PauseManager : MonoBehaviour
         inputHandler.pauseGame -= GamePaused;
         inputHandler.unPauseGame -= GamePaused;
     }
+
     public void GamePaused()
     {
         Debug.Log("game paused");

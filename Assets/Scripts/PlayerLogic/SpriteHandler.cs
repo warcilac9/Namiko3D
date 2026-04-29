@@ -3,16 +3,27 @@ using UnityEngine;
 
 public class SpriteHandler : MonoBehaviour
 {
-    [SerializeField] Rigidbody rb;
+    private MovementHandler movementHandler;
     [SerializeField] Transform playerSprite;
     [SerializeField] Camera mainCamera;
     public bool isRight;
     
-    [SerializeField]private float flipThreshold = 0.1f;
+    [SerializeField] private float flipThreshold = 0.1f;
+
+    void Start()
+    {
+        movementHandler = GetComponent<MovementHandler>();
+        if (movementHandler == null)
+        {
+            movementHandler = GetComponentInParent<MovementHandler>();
+        }
+    }
 
     void Update()
     {
-        Vector3 velocity = rb.linearVelocity;
+        if (movementHandler == null) return;
+
+        Vector3 velocity = movementHandler.GetCurrentVelocity();
         
         Vector3 cameraRight = mainCamera.transform.right;
         

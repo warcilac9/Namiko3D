@@ -7,10 +7,7 @@ public class InputHandler : MonoBehaviour
 public PlayerInput input;
 
 [Header("MoveValues")]
-Vector2 movementValue = Vector2.zero;
-
-[HideInInspector]public float moveValX;
-[HideInInspector]public float moveValY;
+public Vector2 movementValue = Vector2.zero;
 
     public delegate void PauseGame();
     public PauseGame pauseGame;
@@ -18,16 +15,10 @@ Vector2 movementValue = Vector2.zero;
     public UnPauseGame unPauseGame;
 
 
-public delegate void Movement();
-public Movement moving;
-
-public delegate void Jumped();
-public Jumped jumping;
+public bool jump;
 
 public delegate void Transformed();
 public Transformed transforming;
- 
-
 
 public delegate void attackType(int value);
 public attackType typeAttack;
@@ -40,21 +31,11 @@ private int magicID = 2;
 public void Move(InputAction.CallbackContext context)
 {
     movementValue = context.ReadValue<Vector2>().normalized;
-    moveValX = movementValue.x;
-    moveValY = movementValue.y;
-    if (context.performed)
-    {
-        moving?.Invoke();
-    }
 }
 
 public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-
-            jumping?.Invoke();
-        }
+            jumpInput(context.performed);
     }
 public void Transformation(InputAction.CallbackContext context)
     {
@@ -100,7 +81,14 @@ public void CloseMenu(InputAction.CallbackContext context)
             unPauseGame?.Invoke();
         }
     }
+
+public void jumpInput(bool jumpState)
+{
+    jump = jumpState;
 }
+}
+
+
 
 
 

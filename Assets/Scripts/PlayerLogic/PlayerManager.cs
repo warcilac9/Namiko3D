@@ -22,8 +22,7 @@ public class PlayerManager : MonoBehaviour
 
     void Death()
     {
-        inputHandler.moveValX = 0;
-        inputHandler.moveValY = 0;
+        inputHandler.movementValue = Vector2.zero;
         inputHandler.gameObject.SetActive(false);
         gameOverUI.SetActive(true);
         eventSystem.firstSelectedGameObject = playAgainButton.gameObject;
