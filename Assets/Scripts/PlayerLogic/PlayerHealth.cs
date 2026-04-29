@@ -73,8 +73,7 @@ public class PlayerHealth : MonoBehaviour, iDamageable
     IEnumerator CanMove()
     {
         
-        inputHandler.moveValX = 0;
-        inputHandler.moveValY = 0;
+        inputHandler.movementValue = Vector2.zero;
         inputHandler.gameObject.SetActive(false);
         yield return new WaitForSeconds(stun);
         inputHandler.gameObject.SetActive(true);

@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
 public class groundCheck : MonoBehaviour
 {
     [Tooltip("True when grounded.")]

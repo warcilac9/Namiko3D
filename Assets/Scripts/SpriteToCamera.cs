@@ -4,7 +4,7 @@ public class SpriteToCamera : MonoBehaviour
 {
     [SerializeField] Camera mainCamera;
     [SerializeField] private bool isBullet = false;
-    [SerializeField] private string bulletTag = "Bullet"; // Tag to auto-detect bullets
+    //[SerializeField] private string bulletTag = "Bullet"; // Tag to auto-detect bullets
 
     void Start()
     {
