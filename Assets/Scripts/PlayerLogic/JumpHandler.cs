@@ -23,14 +23,14 @@ public class JumpHandler : MonoBehaviour
 
     void OnEnable()
     {
-        if (inputHandler != null)
-            inputHandler.jumping += isJump;
+        //if (inputHandler != null)
+           // inputHandler.jumping += isJump;
     }
 
     void OnDisable()
     {
-        if (inputHandler != null)
-            inputHandler.jumping -= isJump;
+        //if (inputHandler != null)
+            //inputHandler.jumping -= isJump;
     }
 
     public void isJump()

@@ -15,8 +15,7 @@ public Vector2 movementValue = Vector2.zero;
     public UnPauseGame unPauseGame;
 
 
-public delegate void Jumped();
-public Jumped jumping;
+public bool jump;
 
 public delegate void Transformed();
 public Transformed transforming;
@@ -36,11 +35,7 @@ public void Move(InputAction.CallbackContext context)
 
 public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-
-            jumping?.Invoke();
-        }
+            jumpInput(context.performed);
     }
 public void Transformation(InputAction.CallbackContext context)
     {
@@ -86,7 +81,14 @@ public void CloseMenu(InputAction.CallbackContext context)
             unPauseGame?.Invoke();
         }
     }
+
+public void jumpInput(bool jumpState)
+{
+    jump = jumpState;
 }
+}
+
+
 
 
 
