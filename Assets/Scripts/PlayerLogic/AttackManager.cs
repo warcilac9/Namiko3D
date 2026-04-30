@@ -8,11 +8,17 @@ public class AttackManager : MonoBehaviour
     public float comboTimeout = 1.5f;
     public float afterComboCD = 0.5f;
     public int attackCount = 0;
+    public int maxAmmo = 3;
+    public int currentAmmo;
+    public float reloadTimeout = 1f;
+
+
     [SerializeField] GameObject punchHitbox;
     [SerializeField] GameObject kickHitbox;
     [SerializeField] float punchActiveTime = 0.06f;
     [SerializeField] float kickActiveTime = 0.06f;
     float comboTimer = 0f;
+    float reloadTimer = 0f;
     bool canAttack = true;
     bool inComboCooldown = false;
     Coroutine punchHitboxCoroutine;
@@ -33,6 +39,12 @@ public class AttackManager : MonoBehaviour
         {
             kickHitbox = FindChildByName(transform, "kickHItbox");
         }
+    }
+
+    void Start()
+    {
+        currentAmmo = maxAmmo;
+        reloadTimer = 0f;
     }
 
     void OnEnable()
@@ -88,10 +100,31 @@ public class AttackManager : MonoBehaviour
                 attackCount = 0;
             }
         }
+
+        if (reloadTimeout > 0f && currentAmmo < maxAmmo)
+        {
+            reloadTimer += Time.deltaTime;
+
+            if (reloadTimer >= reloadTimeout)
+            {
+                currentAmmo++;
+                reloadTimer = 0f;
+            }
+        }
+        else
+        {
+            reloadTimer = 0f;
+        }
     }
 
     private void addPunch(int punchID)
     {
+        // Prevent entering attack flow for magic if there is no ammo.
+        if (punchID == 2 && currentAmmo <= 0)
+        {
+            return;
+        }
+
         if (inComboCooldown)
         {
             return;
@@ -147,7 +180,6 @@ public class AttackManager : MonoBehaviour
         attackCount = 0;
         inComboCooldown = false;
     }
-
     void SetAttackPhase(int punchID)
     {
         switch(punchID)
@@ -161,7 +193,14 @@ public class AttackManager : MonoBehaviour
                 TriggerKickHitbox();
                 break;
             case 2:
+                if (currentAmmo <= 0)
+                {
+                    attackPhase = 0;
+                    break;
+                }
+
                 attackPhase = 3;
+                currentAmmo--;
                 poolManager.RequesObject(originTransform);
                 break;
             default:

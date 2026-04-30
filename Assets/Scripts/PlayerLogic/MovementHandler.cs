@@ -87,10 +87,6 @@ public class MovementHandler : MonoBehaviour
                 _fallTimeoutDelta -= Time.fixedDeltaTime;
 
             }
-            else
-            {
-                
-            }
 
             input.jump = false;
         }

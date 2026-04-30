@@ -6418,7 +6418,7 @@ MonoBehaviour:
       data:
         PositionOffset: 0
         SearchResolution: 4
-        SearchIteration: 20
+        SearchIteration: 100
 --- !u!114 &1678035148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8326,6 +8326,10 @@ PrefabInstance:
       propertyPath: inputHandler
       value: 
       objectReference: {fileID: 42279597}
+    - target: {fileID: 7598503623062253141, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
+      propertyPath: reloadTimeout
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8043028128659256610, guid: af169e14b281dc54bb87132cf5866d3c, type: 3}
       propertyPath: m_Name
       value: PlayerNamiko
