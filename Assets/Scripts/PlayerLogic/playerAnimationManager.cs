@@ -8,8 +8,10 @@ public class playerAnimationManager : MonoBehaviour
     public InputHandler inputHandler;
     public AttackManager attackManager;
     public PlayerHealth playerHealth;
+    public MovementHandler movementHandler;
 
     private int lastAttackPhase = 0;
+    private float jumpValue = 0;
 
     void OnEnable()
     {
@@ -30,6 +32,15 @@ public class playerAnimationManager : MonoBehaviour
     {
         bool isMoving = inputHandler.movementValue.magnitude > 0.1f;
         animator.SetBool("isWalking", isMoving);
+
+        jumpValue = movementHandler._verticalVelocity;
+        animator.SetFloat("Jump", jumpValue);
+        animator.SetFloat("Fall", jumpValue);
+
+        bool isGrounded = movementHandler.groundCheck.isGrounded;
+        animator.SetBool("isGrounded", isGrounded);
+        Debug.Log(isGrounded);
+        
 
         int currentPhase = attackManager.attackPhase;
         if (currentPhase != lastAttackPhase)

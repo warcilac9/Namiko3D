@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Animations;
 
 [RequireComponent(typeof(CharacterController))]
 public class MovementHandler : MonoBehaviour
@@ -14,7 +15,7 @@ public class MovementHandler : MonoBehaviour
     private float _speed;
     private float _targetRotation;
     private GameObject _mainCamera;
-    private float _verticalVelocity;
+    public float _verticalVelocity;
     
     private CharacterController _controller;
     public InputHandler input;
@@ -84,6 +85,11 @@ public class MovementHandler : MonoBehaviour
             if(_fallTimeoutDelta >= 0.0f)
             {
                 _fallTimeoutDelta -= Time.fixedDeltaTime;
+
+            }
+            else
+            {
+                
             }
 
             input.jump = false;
