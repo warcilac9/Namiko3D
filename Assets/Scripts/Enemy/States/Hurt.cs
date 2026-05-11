@@ -84,7 +84,7 @@ public class Hurt : State
             {
                 if (anim != null)
                 {
-                    anim.SetTrigger("Death");
+                    anim.SetTrigger("isDead");
                 }
 
                 hasTriggeredDeathAnimation = true;
