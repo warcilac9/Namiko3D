@@ -5,7 +5,6 @@ public class StateDebugger : MonoBehaviour
 {
     private AI aiScript;
     public TMP_Text text;
-    public TMP_Text cooldown;
 
     void Start()
     {
@@ -15,6 +14,5 @@ public class StateDebugger : MonoBehaviour
     void Update()
     {
         text.text = aiScript.cState;
-        cooldown.text = 
     }
 }
