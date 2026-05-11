@@ -9,6 +9,7 @@ public class enemyHealth : MonoBehaviour, iDamageable
 
     [Header("Damage Reaction")]
     [SerializeField] private float defaultHurtDuration = 0.4f;
+    [SerializeField] private float deathAnimationDuration = 1f;
     [SerializeField] private float duplicateHitGraceSeconds = 0.08f;
     [SerializeField] private ParticleSystem pSHurt;
 
@@ -20,6 +21,8 @@ public class enemyHealth : MonoBehaviour, iDamageable
     
     public event Action<enemyHealth> OnEnemyDefeated;
     public event Action<EnemyDamagePayload> OnDamageReceived;
+
+    public float DeathAnimationDuration => deathAnimationDuration;
 
     void Awake()
     {
