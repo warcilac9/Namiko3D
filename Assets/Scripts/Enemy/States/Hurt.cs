@@ -4,11 +4,14 @@ using UnityEngine.AI;
 public class Hurt : State
 {
     private readonly float hurtDuration;
+    private readonly float deathAnimationDuration;
     private readonly bool endsInDeathFinalization;
 
     private bool hasTriggeredHurtAnimation;
+    private bool hasTriggeredDeathAnimation;
     private bool hasHandledCompletion;
     private float hurtTimer;
+    private float deathTimer;
 
     private AI ai;
     private enemyHealth health;
@@ -30,6 +33,7 @@ public class Hurt : State
         endsInDeathFinalization = _endsInDeathFinalization;
         ai = _npc.GetComponent<AI>();
         health = _npc.GetComponent<enemyHealth>();
+        deathAnimationDuration = health != null ? health.DeathAnimationDuration : 1f;
     }
 
     public override void Enter()
@@ -49,8 +53,10 @@ public class Hurt : State
         health?.SetCanReceiveDamage(false);
 
         hasTriggeredHurtAnimation = false;
+        hasTriggeredDeathAnimation = false;
         hasHandledCompletion = false;
         hurtTimer = hurtDuration;
+        deathTimer = 0f;
     }
 
     public override void Update()
@@ -72,15 +78,32 @@ public class Hurt : State
             return;
         }
 
-        if (hasHandledCompletion)
-        {
-            return;
-        }
-
-        hasHandledCompletion = true;
-
         if (endsInDeathFinalization)
         {
+            if (!hasTriggeredDeathAnimation)
+            {
+                if (anim != null)
+                {
+                    anim.SetTrigger("Death");
+                }
+
+                hasTriggeredDeathAnimation = true;
+                deathTimer = deathAnimationDuration;
+                return;
+            }
+
+            if (deathTimer > 0f)
+            {
+                deathTimer -= Time.deltaTime;
+                return;
+            }
+
+            if (hasHandledCompletion)
+            {
+                return;
+            }
+
+            hasHandledCompletion = true;
             ai?.HandleHurtFinished(true);
 
             if (!npc.activeInHierarchy)
@@ -93,6 +116,13 @@ public class Hurt : State
             return;
         }
 
+        if (hasHandledCompletion)
+        {
+            return;
+        }
+
+        hasHandledCompletion = true;
+
         nextState = new Idle(npc, agent, anim, player, minCooldown, maxCooldown, attackDuration);
         stage = EVENT.EXIT;
     }
@@ -104,6 +134,7 @@ public class Hurt : State
         if (anim != null)
         {
             anim.ResetTrigger("IsHurt");
+            anim.ResetTrigger("Death");
         }
 
         base.Exit();
