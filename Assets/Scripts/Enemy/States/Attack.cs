@@ -27,6 +27,12 @@ public class Attack : State
     {
         if (!hasAttacked)
         {
+            if(Vector3.Distance(npc.transform.position, player.position) > 3)
+            {
+                nextState = new Pursue(npc, agent, anim, player, minCooldown, maxCooldown, attackDuration);
+                stage = EVENT.EXIT;
+                return;
+            }
             anim.SetTrigger("Attack");
             hasAttacked = true;
             return;

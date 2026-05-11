@@ -7,8 +7,6 @@ public class Pursue : State
     private bool isChangingState = false;
     private float changeTimer = 0f;
     private STATE nextStateType;
-    private float recalculatePathTimer = 0.5f;
-    private float timeSinceLastRecalculation = 0f;
 
     public Pursue(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, float _minCooldown, float _maxCooldown, float _attackDuration) : base(_npc, _agent, _anim, _player, _minCooldown, _maxCooldown, _attackDuration)
     {
@@ -21,7 +19,6 @@ public class Pursue : State
         base.Enter();
         isChangingState = false;
         changeTimer = 0f;
-        timeSinceLastRecalculation = 0f;
     }
     public override void Update()
     {
@@ -46,13 +43,7 @@ public class Pursue : State
 
         if (Vector3.Distance(npc.transform.position, player.position) > 3)
         {
-            // Only recalculate checkpoint path every 0.5 seconds instead of every frame
-            timeSinceLastRecalculation -= Time.deltaTime;
-            if (timeSinceLastRecalculation <= 0f)
-            {
-                RecalculateCheckpointPath();
-                timeSinceLastRecalculation = recalculatePathTimer;
-            }
+            RecalculateCheckpointPath();
         }
         else
         {
@@ -68,13 +59,6 @@ public class Pursue : State
                 isChangingState = true;
                 changeTimer = Random.Range(minCooldown, maxCooldown);
             }
-        }
-
-        if (Random.Range(0, 100) < 1)
-        {
-            nextStateType = STATE.IDLE;
-            isChangingState = true;
-            changeTimer = Random.Range(minCooldown, maxCooldown);
         }
     }
 

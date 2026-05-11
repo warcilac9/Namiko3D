@@ -5014,7 +5014,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4946894114030574109}
-  - component: {fileID: 7279970146728433851}
+  - component: {fileID: 2056911113015695661}
   m_Layer: 0
   m_Name: origin
   m_TagString: Untagged
@@ -5037,7 +5037,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1415402770109865014}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7279970146728433851
+--- !u!114 &2056911113015695661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5049,6 +5049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8975ff4444128cd4dbe09356529c4cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::originForward
+  spriteHandler: {fileID: 2429015408826924780}
 --- !u!1 &4433664109857879399
 GameObject:
   m_ObjectHideFlags: 0
@@ -10071,7 +10072,6 @@ GameObject:
   - component: {fileID: 7207579662003638877}
   - component: {fileID: 7598503623062253141}
   - component: {fileID: 741176515232122739}
-  - component: {fileID: 1781130064939170407}
   - component: {fileID: 6488552018304684843}
   - component: {fileID: 5415114871654351043}
   - component: {fileID: 181502964995408180}
@@ -10120,9 +10120,12 @@ MonoBehaviour:
   MoveSpeed: 2
   SpeedChangeRate: 10
   Gravity: -9.81
-  TerminalVelocity: -53
+  _verticalVelocity: 0
   input: {fileID: 0}
   groundCheck: {fileID: 3616200117327293914}
+  jumpHeight: 0
+  jumpTimeout: 0
+  fallTimeout: 0
 --- !u!114 &2429015408826924780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10130,7 +10133,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8043028128659256610}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb187693189f4ba46815748739d13cc5, type: 3}
   m_Name: 
@@ -10153,7 +10156,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteToCamera
   mainCamera: {fileID: 0}
   isBullet: 0
-  bulletTag: Bullet
 --- !u!114 &7598503623062253141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10171,6 +10173,9 @@ MonoBehaviour:
   comboTimeout: 1
   afterComboCD: 0.5
   attackCount: 0
+  maxAmmo: 3
+  currentAmmo: 0
+  reloadTimeout: 0
   punchHitbox: {fileID: 0}
   kickHitbox: {fileID: 0}
   punchActiveTime: 0.06
@@ -10194,21 +10199,7 @@ MonoBehaviour:
   inputHandler: {fileID: 0}
   attackManager: {fileID: 7598503623062253141}
   playerHealth: {fileID: 5415114871654351043}
---- !u!114 &1781130064939170407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8043028128659256610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 175b6cac9af8fdb448b8b497872b7694, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::JumpHandler
-  inputHandler: {fileID: 0}
-  groundCheck: {fileID: 3616200117327293914}
-  jumpForce: 15
+  movementHandler: {fileID: 0}
 --- !u!114 &6488552018304684843
 MonoBehaviour:
   m_ObjectHideFlags: 0

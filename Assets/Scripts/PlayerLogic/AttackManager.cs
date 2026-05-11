@@ -10,7 +10,7 @@ public class AttackManager : MonoBehaviour
     public int attackCount = 0;
     public int maxAmmo = 3;
     public int currentAmmo;
-    public float reloadTimeout = 1f;
+    public float reloadTimeout;
 
 
     [SerializeField] GameObject punchHitbox;
@@ -101,7 +101,7 @@ public class AttackManager : MonoBehaviour
             }
         }
 
-        if (reloadTimeout > 0f && currentAmmo < maxAmmo)
+        if (currentAmmo < maxAmmo)
         {
             reloadTimer += Time.deltaTime;
 

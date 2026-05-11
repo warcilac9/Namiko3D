@@ -32,15 +32,25 @@ public class Idle : State
         if (isChangingState)
         {
             changeTimer -= Time.deltaTime;
+
             if (changeTimer <= 0f)
             {
+                float distanceToPlayer = Vector3.Distance(npc.transform.position, player.position);
+
                 if (nextStateType == STATE.PURSUE)
                 {
                     nextState = new Pursue(npc, agent, anim, player, minCooldown, maxCooldown, attackDuration);
                 }
                 else if (nextStateType == STATE.ATTACK)
                 {
-                    nextState = new Attack(npc, agent, anim, player, minCooldown, maxCooldown, attackDuration);
+                    if(distanceToPlayer <= 3f)
+                    {
+                        nextState = new Attack(npc, agent, anim, player, minCooldown, maxCooldown, attackDuration);
+                    }
+                    else
+                    {
+                        nextState = new Pursue(npc, agent, anim, player, minCooldown, maxCooldown, attackDuration);
+                    } 
                 }
                 stage = EVENT.EXIT;
             }

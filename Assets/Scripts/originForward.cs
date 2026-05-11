@@ -2,16 +2,8 @@ using UnityEngine;
 
 public class originForward : MonoBehaviour
 {
-    private SpriteHandler spriteHandler;
+    [SerializeField] private SpriteHandler spriteHandler;
 
-    void Start()
-    {
-        spriteHandler = transform.parent?.GetComponent<SpriteHandler>();
-        if (spriteHandler == null)
-        {
-            Debug.LogWarning("originForward: Parent does not have SpriteHandler component!");
-        }
-    }
 
     void LateUpdate()
     {

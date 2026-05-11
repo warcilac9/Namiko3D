@@ -13,6 +13,9 @@ public class AI : MonoBehaviour
 
     private State currentState;
 
+    //debug
+    public string cState;
+
     public float minCooldown;
     public float maxCooldown;
     public float attackDuration = 0.4f;
@@ -84,6 +87,7 @@ public class AI : MonoBehaviour
         if(currentState != null)
         {
             currentState = currentState.Process();
+            cState = currentState.ToString();
         }
 
         TryConsumePendingDamage();
