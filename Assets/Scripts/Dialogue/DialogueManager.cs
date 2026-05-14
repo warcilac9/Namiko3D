@@ -40,4 +40,8 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(textSpeed);
         }
     }
+    public void NextLine()
+    {
+
+    }
 }
