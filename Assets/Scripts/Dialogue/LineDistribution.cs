@@ -2,15 +2,11 @@ using UnityEngine;
 
 public class LineDistribution : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public DialogueLines dialogueLines;
+    public DialogueManager dialogueManager;
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionStay(Collision collision)
     {
-        
+        dialogueManager.dialogue = dialogueLines;
     }
 }

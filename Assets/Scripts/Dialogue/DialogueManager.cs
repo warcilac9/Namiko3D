@@ -8,7 +8,7 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public DialogueLines dialogue;
-    public Canvas canvas;
+    public GameObject canvas;
     public Image[] characterImg;
     public TextMeshProUGUI text;
     public string[] lines;
@@ -19,8 +19,7 @@ public class DialogueManager : MonoBehaviour
 
 
     void Start()
-    {
-        
+    {   
         text.text = string.Empty;
         StartDialogue(dialogue);
     }
@@ -33,6 +32,7 @@ public class DialogueManager : MonoBehaviour
     }
     private void StartDialogue(DialogueLines SOlines)
     {
+        canvas.GetComponent<Canvas>().enabled = true;
         index = SOlines.index;
         lines = SOlines.characterLines;
         StartCoroutine(TypeLines());
@@ -64,5 +64,6 @@ public class DialogueManager : MonoBehaviour
     public void EndLine()
     {
         //make sure lines end
+        canvas.GetComponent<Canvas>().enabled = false;
     }
 }
