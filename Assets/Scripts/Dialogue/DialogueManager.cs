@@ -7,28 +7,34 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    public DialogueLines dialogue;
     public Canvas canvas;
     public Image[] characterImg;
     public TextMeshProUGUI text;
     public string[] lines;
     public float textSpeed;
 
+
     [SerializeField] private int index;
 
 
     void Start()
     {
+        
         text.text = string.Empty;
-        StartDialogue();
+        StartDialogue(dialogue);
     }
 
     void Update()
     {
-        
+       
+            //NextLine(dialogue);
+     
     }
-    private void StartDialogue()
+    private void StartDialogue(DialogueLines SOlines)
     {
-        index = 2;
+        index = SOlines.index;
+        lines = SOlines.characterLines;
         StartCoroutine(TypeLines());
 
     }
@@ -40,8 +46,23 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(textSpeed);
         }
     }
-    public void NextLine()
+    public void NextLine(DialogueLines SOlines)
     {
-
+        index = SOlines.index;
+        lines = SOlines.characterLines;
+        if(index < lines.Length - 1)
+        {
+            index++;
+            text.text = string.Empty;
+            StartCoroutine(TypeLines());
+        }
+        else
+        {
+           
+        }
+    }
+    public void EndLine()
+    {
+        //make sure lines end
     }
 }

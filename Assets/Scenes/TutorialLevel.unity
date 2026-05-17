@@ -7092,16 +7092,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3b09af231002749b27bfb831bf3b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
+  dialogue: {fileID: 11400000, guid: 735f1983ec6946b4092f1e71e4f9b0b1, type: 2}
   canvas: {fileID: 1048279640}
   characterImg: []
   text: {fileID: 711896404}
-  lines:
-  - Hi
-  - Im Namiko
-  - This is just a Dialogue Test it's not finished yet
-  - Lol
+  lines: []
   textSpeed: 0.025
-  index: 2
+  index: 0
 --- !u!1 &1716887112
 GameObject:
   m_ObjectHideFlags: 0
