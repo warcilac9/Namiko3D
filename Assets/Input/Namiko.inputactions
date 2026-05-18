@@ -328,7 +328,7 @@
                     "name": "Cancel",
                     "type": "Button",
                     "id": "b78d179d-cd12-43d0-9483-12530daf2a28",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -400,6 +400,15 @@
                     "name": "CloseMenu",
                     "type": "Button",
                     "id": "ffd56da8-24a1-406d-adae-7cc1b8d66088",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NextDialogue",
+                    "type": "Button",
+                    "id": "0fb8d261-a968-4457-a642-25c4324d3244",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -844,6 +853,17 @@
                     "processors": "",
                     "groups": ";Controller",
                     "action": "CloseMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8c50ddcb-330b-4dd9-81b5-22ba47f728e3",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";MnK",
+                    "action": "NextDialogue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

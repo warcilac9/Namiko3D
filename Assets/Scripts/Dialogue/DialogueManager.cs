@@ -23,10 +23,12 @@ public class DialogueManager : MonoBehaviour
     private void OnEnable()
     {
         inputHandler.interacting += GetDialogue;
+        inputHandler.dialogue += NextLine;
     }
     private void OnDisable()
     {
         inputHandler.interacting -= GetDialogue;
+        inputHandler.dialogue -= NextLine;
     }
 
 
@@ -63,6 +65,7 @@ public class DialogueManager : MonoBehaviour
     {
         
         canvas.GetComponent<Canvas>().enabled = true;
+        inputHandler.input.SwitchCurrentActionMap("UI");
         index = SOlines.index;
         lines = SOlines.characterLines;
         StartCoroutine(TypeLines());
@@ -76,10 +79,10 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(textSpeed);
         }
     }
-    public void NextLine(DialogueLines SOlines)
+    public void NextLine(/*DialogueLines SOlines*/)
     {
-        index = SOlines.index;
-        lines = SOlines.characterLines;
+        //index = SOlines.index;
+        //lines = SOlines.characterLines;
         if(index < lines.Length - 1)
         {
             index++;

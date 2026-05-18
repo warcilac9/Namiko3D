@@ -13,18 +13,19 @@ public Vector2 movementValue = Vector2.zero;
     public PauseGame pauseGame;
     public delegate void UnPauseGame();
     public UnPauseGame unPauseGame;
-    
+    public delegate void Dialogue();
+    public Dialogue dialogue;
 
-public bool jump;
+    public bool jump;
 
-public delegate void Transformed();
-public Transformed transforming;
+    public delegate void Transformed();
+    public Transformed transforming;
 
     public delegate void Interacted();
     public Interacted interacting;
 
-public delegate void attackType(int value);
-public attackType typeAttack;
+   public delegate void attackType(int value);
+   public attackType typeAttack;
 
 private int punchID = 0;
 private int kickID = 1;
@@ -90,6 +91,13 @@ public void CloseMenu(InputAction.CallbackContext context)
         if(context.performed)
         {
             unPauseGame?.Invoke();
+        }
+    }
+public void NextDialogue(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            dialogue?.Invoke();
         }
     }
 
