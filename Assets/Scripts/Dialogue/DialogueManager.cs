@@ -21,14 +21,23 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {   
         text.text = string.Empty;
-        StartDialogue(dialogue);
+        if (dialogue != null)
+        {
+            StartDialogue(dialogue);
+        }
+
     }
 
     void Update()
     {
-       
-            //NextLine(dialogue);
+       if(dialogue == null)
+        {
+            Debug.Log("No Dialogue Lines Inserted!");
+            return;
+        }
      
+        //NextLine(dialogue);
+
     }
     private void StartDialogue(DialogueLines SOlines)
     {

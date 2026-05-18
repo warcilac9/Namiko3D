@@ -13,12 +13,15 @@ public Vector2 movementValue = Vector2.zero;
     public PauseGame pauseGame;
     public delegate void UnPauseGame();
     public UnPauseGame unPauseGame;
-
+    
 
 public bool jump;
 
 public delegate void Transformed();
 public Transformed transforming;
+
+    public delegate void Interacted();
+    public Interacted interacting;
 
 public delegate void attackType(int value);
 public attackType typeAttack;
@@ -37,6 +40,14 @@ public void Jump(InputAction.CallbackContext context)
     {
             jumpInput(context.performed);
     }
+public void Interact(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            interacting?.Invoke();
+        }
+    }
+
 public void Transformation(InputAction.CallbackContext context)
     {
         if(context.performed)
