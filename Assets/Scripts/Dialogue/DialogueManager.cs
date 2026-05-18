@@ -7,6 +7,7 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    public Queue<DialogueLines> dialoguePool = new Queue<DialogueLines>();
     public DialogueLines dialogue;
     public GameObject canvas;
     public Image[] characterImg;
@@ -14,23 +15,33 @@ public class DialogueManager : MonoBehaviour
     public string[] lines;
     public float textSpeed;
 
+    public InputHandler inputHandler;
+
 
     [SerializeField] private int index;
 
+    private void OnEnable()
+    {
+        inputHandler.interacting += GetDialogue;
+    }
+    private void OnDisable()
+    {
+        inputHandler.interacting -= GetDialogue;
+    }
+
 
     void Start()
-    {   
+    {
+        
         text.text = string.Empty;
-        if (dialogue != null)
-        {
-            StartDialogue(dialogue);
-        }
 
     }
 
     void Update()
     {
-       if(dialogue == null)
+        
+        Debug.Log(dialoguePool.Count);
+        if (dialogue == null)
         {
             Debug.Log("No Dialogue Lines Inserted!");
             return;
@@ -39,8 +50,18 @@ public class DialogueManager : MonoBehaviour
         //NextLine(dialogue);
 
     }
+    private void GetDialogue()
+    {
+        Debug.Log("Interacting..");
+        if (dialoguePool != null)
+        {
+            dialogue = dialoguePool.Peek();
+            StartDialogue(dialogue);
+        }
+    }
     private void StartDialogue(DialogueLines SOlines)
     {
+        
         canvas.GetComponent<Canvas>().enabled = true;
         index = SOlines.index;
         lines = SOlines.characterLines;

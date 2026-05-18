@@ -19,7 +19,7 @@ public class InteractionManager : MonoBehaviour
     {
         public void Interaction()
         {
-
+            
         }
     }
     class Dialogue : IInteract

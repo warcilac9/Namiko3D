@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "DialogueLines", menuName = "Scriptable Objects/DialogueLines", order = 55)]
 public class DialogueLines : ScriptableObject
