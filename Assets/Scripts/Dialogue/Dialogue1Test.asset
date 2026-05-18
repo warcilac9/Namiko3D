@@ -15,8 +15,9 @@ MonoBehaviour:
   characterImages: []
   characterLines:
   - Im Namiko
-  - uwu
-  - owo
-  - uwu
+  - This is a Dialogue Test
+  - Its obviously not finished yet
+  - I wanna die lol
   index: 0
   repeatFrom: 0
+  firstInteraction: 0

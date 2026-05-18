@@ -66,7 +66,14 @@ public class DialogueManager : MonoBehaviour
         text.text = string.Empty;
         canvas.GetComponent<Canvas>().enabled = true;
         inputHandler.input.SwitchCurrentActionMap("UI");
-        index = SOlines.index;
+        if(dialogue.firstInteraction)
+        {
+            index = SOlines.index;
+        } 
+        else
+        {
+            index = dialogue.repeatFrom;
+        }
         lines = SOlines.characterLines;
         StartCoroutine(TypeLines());
 
@@ -91,6 +98,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+
             EndLine();
         }
     }
@@ -109,7 +117,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void EndLine()
     {
-        //make sure lines end
+        dialogue.firstInteraction = false;
         inputHandler.input.SwitchCurrentActionMap("Player");
         canvas.GetComponent<Canvas>().enabled = false;
     }

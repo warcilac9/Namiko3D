@@ -406,6 +406,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ffd56da8-24a1-406d-adae-7cc1b8d66088
     m_ActionName: 'UI/CloseMenu[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 42279597}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0cdfb81c-844a-4d0c-a251-ed97d78391d4
+    m_ActionName: 'Player/Interact[/Keyboard/f]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 42279597}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: NextDialogue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0fb8d261-a968-4457-a642-25c4324d3244
+    m_ActionName: 'UI/NextDialogue[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -725,7 +757,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcdb7416cceffbb438da443b98bd466a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LineDistribution
-  dialogueLines: {fileID: 11400000, guid: 735f1983ec6946b4092f1e71e4f9b0b1, type: 2}
+  dialogueLines:
+  - {fileID: 11400000, guid: 735f1983ec6946b4092f1e71e4f9b0b1, type: 2}
+  - {fileID: 11400000, guid: b3c516126a2c04148b967ef3d10ec01d, type: 2}
   dialogueManager: {fileID: 1706293754}
 --- !u!136 &99122201
 CapsuleCollider:
@@ -6812,6 +6846,7 @@ MonoBehaviour:
   text: {fileID: 711896404}
   lines: []
   textSpeed: 0.025
+  inputHandler: {fileID: 42279597}
   index: 0
 --- !u!1 &1724127575
 GameObject:

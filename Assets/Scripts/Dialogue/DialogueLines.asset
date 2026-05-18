@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: DialogueLines
   m_EditorClassIdentifier: Assembly-CSharp::DialogueLines
   characterImages: []
-  characterLines: []
+  characterLines:
+  - aaaaaaaaaaaaaa
+  - aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   index: 0
   repeatFrom: 0
+  firstInteraction: 0

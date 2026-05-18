@@ -10,4 +10,5 @@ public class DialogueLines : ScriptableObject
     public string[] characterLines;
     public int index;
     public int repeatFrom;
+    public bool firstInteraction;
 }
