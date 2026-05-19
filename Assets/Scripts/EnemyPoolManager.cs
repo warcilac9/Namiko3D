@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 // ========== TEMPORARY: Remove when feature is no longer needed ==========
@@ -9,14 +8,17 @@ using UnityEngine.SceneManagement;
 public class EnemyPoolManager : MonoBehaviour
 {
     [SerializeField] private GameObject Prefab;
+    [SerializeField] private GameObject rangedPrefab;
     private int poolSize = 10;
     [SerializeField] private List<GameObject> bulletList;
+    [SerializeField] private List<GameObject> rangedEnemyList;
     [SerializeField] Transform origin;
     [SerializeField] EventSO eventSO;
 
     private int pendingEnemies;
-    private int activeEnemies;
-    private int maxActiveEnemies;
+    private int pendingRangedEnemies;
+    private int maxBasicActiveEnemies;
+    private int maxRangedActiveEnemies;
     private bool allEnemiesDefeatedLogged;
     private Transform currentWaveSpawnPoint;
     private bool isPoolInitialized = false;
@@ -39,6 +41,11 @@ public class EnemyPoolManager : MonoBehaviour
             bulletList = new List<GameObject>();
         }
 
+        if (rangedEnemyList == null)
+        {
+            rangedEnemyList = new List<GameObject>();
+        }
+
         if (origin == null)
         {
             origin = transform;
@@ -47,25 +54,36 @@ public class EnemyPoolManager : MonoBehaviour
         // Don't initialize pool at startup - do it lazily when needed
     }
 
-    private void AddObjectsToPool(int amount)
+    private void AddObjectsToPool(int amount, GameObject prefab, List<GameObject> pool)
     {
+        if (prefab == null || pool == null)
+        {
+            return;
+        }
+
         for (int i = 0; i < amount; i++)
         {
-            GameObject Object = Instantiate(Prefab, origin.transform);
+            GameObject Object = Instantiate(prefab, origin.transform);
             Object.SetActive(false);
-            bulletList.Add(Object);
+            pool.Add(Object);
             Object.transform.parent = transform;
         }
     }
 
-    public void StartWave(int enemiesToSpawn, int maxEnemies, Transform spawnPoint = null)
+    public void StartWave(
+        int enemiesToSpawn,
+        int rangedEnemiesToSpawn,
+        int maxBasicEnemies,
+        int maxRangedEnemies,
+        Transform spawnPoint = null)
     {
         EnsurePoolInitialized();
         
         allEnemiesDefeatedLogged = false;
         pendingEnemies = Mathf.Max(0, enemiesToSpawn);
-        activeEnemies = CountActiveEnemies();
-        maxActiveEnemies = Mathf.Max(1, maxEnemies);
+        pendingRangedEnemies = Mathf.Max(0, rangedEnemiesToSpawn);
+        maxBasicActiveEnemies = Mathf.Max(0, maxBasicEnemies);
+        maxRangedActiveEnemies = Mathf.Max(0, maxRangedEnemies);
         currentWaveSpawnPoint = spawnPoint != null ? spawnPoint : origin;
 
         TrySpawnPending(currentWaveSpawnPoint);
@@ -76,24 +94,41 @@ public class EnemyPoolManager : MonoBehaviour
     {
         if (!isPoolInitialized)
         {
-            AddObjectsToPool(poolSize);
+            AddObjectsToPool(poolSize, Prefab, bulletList);
+            AddObjectsToPool(poolSize, rangedPrefab, rangedEnemyList);
             isPoolInitialized = true;
         }
     }
 
     public GameObject RequesObject(Transform position)
     {
-        for (int i = 0; i < bulletList.Count; i++)
+        return RequestObjectFromPool(position, bulletList, Prefab);
+    }
+
+    public GameObject RequestRangedObject(Transform position)
+    {
+        return RequestObjectFromPool(position, rangedEnemyList, rangedPrefab);
+    }
+
+    private GameObject RequestObjectFromPool(Transform position, List<GameObject> pool, GameObject prefab)
+    {
+        if (pool == null || prefab == null)
         {
-            if (!bulletList[i].activeSelf)
+            return null;
+        }
+
+        for (int i = 0; i < pool.Count; i++)
+        {
+            if (!pool[i].activeSelf)
             {
-                SetEnemySpawn(bulletList[i], position);
-                return bulletList[i];
+                SetEnemySpawn(pool[i], position);
+                return pool[i];
             }
         }
-        AddObjectsToPool(1);
-        SetEnemySpawn(bulletList[bulletList.Count - 1], position);
-        return bulletList[bulletList.Count - 1];
+
+        AddObjectsToPool(1, prefab, pool);
+        SetEnemySpawn(pool[pool.Count - 1], position);
+        return pool[pool.Count - 1];
     }
 
     private void SetEnemySpawn(GameObject enemy, Transform spawnPoint)
@@ -112,14 +147,17 @@ public class EnemyPoolManager : MonoBehaviour
 
     private void HandleEnemyDefeated(enemyHealth _) 
     {
-        activeEnemies = Mathf.Max(0, activeEnemies - 1);
         TrySpawnPending(currentWaveSpawnPoint != null ? currentWaveSpawnPoint : origin);
         CheckWaveCompletion();
     }
 
     private void CheckWaveCompletion()
     {
-        if (pendingEnemies <= 0 && activeEnemies <= 0 && !allEnemiesDefeatedLogged)
+        int activeBasicEnemies = CountActiveEnemiesInPool(bulletList);
+        int activeRangedEnemies = CountActiveEnemiesInPool(rangedEnemyList);
+        int totalActiveEnemies = activeBasicEnemies + activeRangedEnemies;
+
+        if (pendingEnemies <= 0 && pendingRangedEnemies <= 0 && totalActiveEnemies <= 0 && !allEnemiesDefeatedLogged)
         {
             allEnemiesDefeatedLogged = true;
             AllEnemiesDefeated();
@@ -141,20 +179,48 @@ public class EnemyPoolManager : MonoBehaviour
 
     private void TrySpawnPending(Transform spawnPoint)
     {
-        while (pendingEnemies > 0 && activeEnemies < maxActiveEnemies)
+        while (pendingEnemies > 0 || pendingRangedEnemies > 0)
         {
-            RequesObject(spawnPoint);
-            pendingEnemies--;
-            activeEnemies++;
+            int activeBasicEnemies = CountActiveEnemiesInPool(bulletList);
+            int activeRangedEnemies = CountActiveEnemiesInPool(rangedEnemyList);
+
+            bool canSpawnBasic = pendingEnemies > 0 && activeBasicEnemies < maxBasicActiveEnemies;
+            bool canSpawnRanged = pendingRangedEnemies > 0 && activeRangedEnemies < maxRangedActiveEnemies;
+
+            if (!canSpawnBasic && !canSpawnRanged)
+            {
+                break;
+            }
+
+            if (canSpawnBasic)
+            {
+                if (RequesObject(spawnPoint) != null)
+                {
+                    pendingEnemies--;
+                }
+            }
+
+            if (canSpawnRanged)
+            {
+                if (RequestRangedObject(spawnPoint) != null)
+                {
+                    pendingRangedEnemies--;
+                }
+            }
         }
     }
 
-    private int CountActiveEnemies()
+    private int CountActiveEnemiesInPool(List<GameObject> pool)
     {
-        int count = 0;
-        for (int i = 0; i < bulletList.Count; i++)
+        if (pool == null)
         {
-            if (bulletList[i] != null && bulletList[i].activeSelf)
+            return 0;
+        }
+
+        int count = 0;
+        for (int i = 0; i < pool.Count; i++)
+        {
+            if (pool[i] != null && pool[i].activeSelf)
             {
                 count++;
             }

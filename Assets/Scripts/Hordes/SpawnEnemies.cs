@@ -4,8 +4,13 @@ public class SpawnEnemies : MonoBehaviour
 {
     [SerializeField] private EnemyPoolManager enemyPoolManager;
 
-    public void spawnEnemies(int enemiesToSpawn, int maxEnemies, Transform origin)
+    public void spawnEnemies(EnemySpawnData data)
     {
+        if (data == null)
+        {
+            return;
+        }
+
         if (enemyPoolManager == null)
         {
             enemyPoolManager = FindFirstObjectByType<EnemyPoolManager>();
@@ -16,6 +21,6 @@ public class SpawnEnemies : MonoBehaviour
             return;
         }
 
-        enemyPoolManager.StartWave(enemiesToSpawn, maxEnemies, origin);
+        enemyPoolManager.StartWave(data.EnemiesToSpawn, data.RangedEnemiesToSpawn, data.MaxBasicEnemies, data.MaxRangedEnemies, data.Origin);
     }
 }

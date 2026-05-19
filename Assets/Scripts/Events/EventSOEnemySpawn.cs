@@ -18,11 +18,11 @@ public class EventSOEnemySpawn : ScriptableObject
         eventListeners.Remove(listener);
     }
 
-    public void Occurred(int enemiesToSpawn, int maxEnemies, Transform origin)
+    public void Occurred(int enemiesToSpawn, int rangedEnemiesToSpawn, int maxBasicEnemies,int maxRangedEnemies, Transform origin)
     {
         for(int i = 0; i < eventListeners.Count; i++)
         {
-            eventListeners[i].invokeEvent(enemiesToSpawn, maxEnemies, origin);
+            eventListeners[i].InvokeEvent(enemiesToSpawn, rangedEnemiesToSpawn, maxBasicEnemies, maxRangedEnemies, origin);
         }
     }
 }

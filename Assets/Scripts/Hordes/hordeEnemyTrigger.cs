@@ -5,7 +5,9 @@ public class hordeEnemyTrigger : MonoBehaviour
     public Collider hordeTrigger;
     public EventSOEnemySpawn triggerEffect;
     public int enemiesToSpawn;
-    public int maxEnemies = 3;
+    public int rangedEnemiesToSpawn;
+    public int maxRangedEnemies;
+    public int maxBasicEnemies;
     public GameObject triggerObj;
     public Transform origin;
 
@@ -13,7 +15,7 @@ public class hordeEnemyTrigger : MonoBehaviour
     {
         if(other.TryGetComponent<PlayerHealth>(out var playerHealth) && triggerEffect != null)
         {
-            triggerEffect.Occurred(enemiesToSpawn, maxEnemies, origin);
+            triggerEffect.Occurred(enemiesToSpawn, rangedEnemiesToSpawn, maxBasicEnemies, maxRangedEnemies, origin);
         }
     }
 

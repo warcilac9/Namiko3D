@@ -1233,7 +1233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 276662356}
   m_Layer: 0
-  m_Name: ---Hordes---
+  m_Name: ---HORDES---
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8176,6 +8176,18 @@ PrefabInstance:
       propertyPath: enemiesToSpawn
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5892003774519272425, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
+      propertyPath: maxBasicEnemies
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5892003774519272425, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
+      propertyPath: maxRangedEnemies
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5892003774519272425, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
+      propertyPath: rangedEnemiesToSpawn
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6021900794231354518, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -8702,6 +8714,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HordeManagers
       objectReference: {fileID: 0}
+    - target: {fileID: 1493885593660337830, guid: 87a3bce64a57c8247be7b87ea5fddc11, type: 3}
+      propertyPath: rangedPrefab
+      value: 
+      objectReference: {fileID: 6803973653747788385, guid: 5366f891b19644241802502b8c2c0050, type: 3}
     - target: {fileID: 6037629556185983380, guid: 87a3bce64a57c8247be7b87ea5fddc11, type: 3}
       propertyPath: movementHandler
       value: 

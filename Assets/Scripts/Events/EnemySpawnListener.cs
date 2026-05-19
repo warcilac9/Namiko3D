@@ -2,7 +2,18 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class EnemySpawnPairEvent : UnityEvent<int, int, Transform> {}
+public class EnemySpawnData
+{
+    public int EnemiesToSpawn;
+    public int RangedEnemiesToSpawn;
+    public int MaxBasicEnemies;
+    public int MaxRangedEnemies;
+    public Transform Origin;
+    
+}
+
+[System.Serializable]
+public class EnemySpawnPairEvent : UnityEvent<EnemySpawnData> {}
 
 public class EnemySpawnListener : MonoBehaviour
 {
@@ -25,8 +36,17 @@ public class EnemySpawnListener : MonoBehaviour
         }
     }
 
-    public void invokeEvent(int enemiesToSpawn, int maxEnemies, Transform origin)
+    public void InvokeEvent(int enemiesToSpawn, int rangedEnemiesToSpawn, int maxBasicEnemies,int maxRangedEnemies, Transform origin)
     {
-        response?.Invoke(enemiesToSpawn, maxEnemies, origin);
+        var data = new EnemySpawnData
+        {
+            EnemiesToSpawn = enemiesToSpawn,
+            RangedEnemiesToSpawn = rangedEnemiesToSpawn,
+            MaxBasicEnemies = maxBasicEnemies,
+            MaxRangedEnemies = maxRangedEnemies,
+            Origin = origin
+        };
+
+        response?.Invoke(data);
     }
 }
