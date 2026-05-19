@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,6 +20,12 @@ public class RangedAI : MonoBehaviour
     public float retreatDistance = 3.5f;
     public float preferredMinDistance = 5f;
     public float preferredMaxDistance = 8f;
+
+    [Header("Attack Rhythm")]
+    public float minAttackInterval = 1.1f;
+    public float maxAttackInterval = 2.2f;
+
+    private float nextAttackAllowedTime;
 
     private EnemyDamagePayload pendingDamage;
     private bool hasPendingDamage;
@@ -48,6 +53,7 @@ public class RangedAI : MonoBehaviour
             agent.isStopped = false;
         }
 
+        nextAttackAllowedTime = 0f;
         currentState = null;
         TryResolvePlayer();
         EnsureStartingState();
@@ -99,16 +105,20 @@ public class RangedAI : MonoBehaviour
             return;
         }
 
-        currentState = new Hurt(
-        gameObject,
-        agent,
-        anim,
-        player,
-        minCooldown,
-        maxCooldown,
-        attackDuration,
-        pendingDamage.HurtDuration,
-        pendingDamage.IsLethal);
+        currentState = new RangedHurt(
+            gameObject,
+            agent,
+            anim,
+            player,
+            minCooldown,
+            maxCooldown,
+            attackDuration,
+            pendingDamage.HurtDuration,
+            pendingDamage.IsLethal,
+            retreatDistance,
+            preferredMinDistance,
+            preferredMaxDistance
+        );
 
         hasPendingDamage = false;
         pendingDamage = null;
@@ -156,7 +166,18 @@ public class RangedAI : MonoBehaviour
         }
         if(player != null)
         {
-            currentState = new Idle(gameObject, agent, anim, player, minCooldown, maxCooldown, attackDuration);
+            currentState = new RangedIdle(
+                gameObject,
+                agent,
+                anim,
+                player,
+                minCooldown,
+                maxCooldown,
+                attackDuration,
+                retreatDistance,
+                preferredMinDistance,
+                preferredMaxDistance
+            );
         } 
     }
 
@@ -173,5 +194,16 @@ public class RangedAI : MonoBehaviour
         player = taggedPlayer.transform;
         return;
         }
+    }
+
+    public bool CanStartAttack()
+    {
+        return Time.time >= nextAttackAllowedTime;
+    }
+
+    public void ConsumeAttackWindow()
+    {
+        float interval = Random.Range(minAttackInterval,maxAttackInterval);
+        nextAttackAllowedTime = Time.time + interval;
     }
 }

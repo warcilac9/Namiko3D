@@ -23,6 +23,8 @@ public class Idle : State
     public override void Update()
     {
         anim.SetTrigger("Idle");
+        AI ai = npc.GetComponent<AI>();
+        bool canAttack = ai == null || ai.CanStartAttack();
 
         if (player == null)
         {
@@ -63,7 +65,7 @@ public class Idle : State
                 isChangingState = true;
                 changeTimer = Random.Range(minCooldown, maxCooldown);
             }
-            else if (Random.Range(0, 100) < 10 && Vector3.Distance(npc.transform.position, player.position) < 3)
+            else if (canAttack && Random.Range(0, 100) < 10 && Vector3.Distance(npc.transform.position, player.position) < 3)
             {
                 nextStateType = STATE.ATTACK;
                 isChangingState = true;

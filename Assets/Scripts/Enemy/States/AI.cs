@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,7 +8,12 @@ public class AI : MonoBehaviour
 
     public Animator anim;
     public Transform player;
-    
+
+    [Header("Attack Rhythm")]
+    public float minAttackInterval = 0.9f;
+    public float maxAttackInterval = 1.8f;
+
+    private float nextAttackAllowedTime;
 
     private State currentState;
 
@@ -61,6 +65,7 @@ public class AI : MonoBehaviour
         currentState = null;
         TryResolvePlayer();
         EnsureStartingState();
+        nextAttackAllowedTime = 0f;
     }
 
     void OnDisable()
@@ -98,6 +103,17 @@ public class AI : MonoBehaviour
         pendingDamage = payload;
         hasPendingDamage = true;
         hasPendingLethalDamage = payload.IsLethal;
+    }
+
+    public bool CanStartAttack()
+    {
+        return Time.time >= nextAttackAllowedTime;
+    }
+
+    public void ConsumeAttackWindow()
+    {
+        float interval = Random.Range(minAttackInterval, maxAttackInterval);
+        nextAttackAllowedTime = Time.time + interval;
     }
 
     private void TryConsumePendingDamage()

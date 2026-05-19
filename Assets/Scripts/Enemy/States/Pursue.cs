@@ -23,6 +23,9 @@ public class Pursue : State
     public override void Update()
     {
         anim.SetBool("isWalking", true);
+        AI ai = npc.GetComponent<AI>();
+        bool canAttack = ai == null || ai.CanStartAttack();
+
         if (isChangingState)
         {
             changeTimer -= Time.deltaTime;
@@ -47,18 +50,18 @@ public class Pursue : State
         }
         else
         {
-            if (Random.Range(0, 100) < 20)
-            {
-                nextStateType = STATE.ATTACK;
-                isChangingState = true;
-                changeTimer = Random.Range(minCooldown, maxCooldown);
-            }
-            else
-            {
-                nextStateType = STATE.IDLE;
-                isChangingState = true;
-                changeTimer = Random.Range(minCooldown, maxCooldown);
-            }
+            if (canAttack && Random.Range(0, 100) < 20)
+{
+    nextStateType = STATE.ATTACK;
+    isChangingState = true;
+    changeTimer = Random.Range(minCooldown, maxCooldown);
+}
+else
+{
+    nextStateType = STATE.IDLE;
+    isChangingState = true;
+    changeTimer = Random.Range(minCooldown, maxCooldown);
+}
         }
     }
 
