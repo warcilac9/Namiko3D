@@ -33,6 +33,13 @@ public class Attack : State
                 stage = EVENT.EXIT;
                 return;
             }
+
+            AI ai = npc.GetComponent<AI>();
+            if (ai != null)
+            {
+                ai.ConsumeAttackWindow();
+            }
+
             anim.SetTrigger("Attack");
             hasAttacked = true;
             return;

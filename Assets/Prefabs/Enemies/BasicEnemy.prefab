@@ -445,7 +445,7 @@ MonoBehaviour:
   cState: 
   minCooldown: 0.1
   maxCooldown: 0.5
-  attackDuration: 0.4
+  attackDuration: 1
 --- !u!136 &4134610683553649603
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -484,6 +484,7 @@ MonoBehaviour:
   MaxHealth: 30
   hitBox: {fileID: 4134610683553649603}
   defaultHurtDuration: 1
+  deathAnimationDuration: 1
   duplicateHitGraceSeconds: 0.08
   pSHurt: {fileID: 1123454242542903204}
 --- !u!114 &6023396087444625415

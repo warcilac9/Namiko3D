@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2488730703959610961}
+  - component: {fileID: 6113641260083408888}
   m_Layer: 0
   m_Name: ProjectilePoint
   m_TagString: Untagged
@@ -31,6 +32,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8511320463017455693}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6113641260083408888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115163505963822621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b195d2787af4774b95ba31e93e511e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RangedProjectilePool
+  projectilePrefab: {fileID: 4044958635021401148, guid: 3a5bb02609483b64b93d5630a1813541, type: 3}
+  shootPoint: {fileID: 8434646395396736900}
+  poolSize: 5
+  flightDuration: 1
+  arcHeight: 2
 --- !u!1 &5295394674653129393
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +335,7 @@ GameObject:
   - component: {fileID: 4134610683553649603}
   - component: {fileID: 1337702920376407822}
   - component: {fileID: 6023396087444625415}
+  - component: {fileID: 81782335922449350}
   m_Layer: 0
   m_Name: RangedEnemy
   m_TagString: Untagged
@@ -379,8 +398,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -478,6 +497,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StateDebugger
   text: {fileID: 7702040200585105221}
+--- !u!114 &81782335922449350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6803973653747788385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400e277d7a109234a8d3b0e9df16c791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RangedAI
+  anim: {fileID: 140723836746063711}
+  player: {fileID: 0}
+  minCooldown: 0.1
+  maxCooldown: 0.5
+  attackDuration: 0.4
+  retreatDistance: 3.5
+  preferredMinDistance: 5
+  preferredMaxDistance: 8
 --- !u!1 &7697933147642948649
 GameObject:
   m_ObjectHideFlags: 0
