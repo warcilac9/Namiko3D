@@ -10,6 +10,7 @@ public class RangedAttack : State
     private readonly RangedProjectilePool projectilePool;
     private bool hasFired;
     private float attackTimer;
+    private float shotDelayTimer;
 
     public RangedAttack(
         GameObject _npc,
@@ -50,12 +51,18 @@ public class RangedAttack : State
 
         hasFired = false;
         attackTimer = attackDuration;
+
+        RangedAI rangedAI = npc.GetComponent<RangedAI>();
+        shotDelayTimer = rangedAI != null ? rangedAI.shotDelay : 0f;
     }
 
     public override void Update()
     {
         if (!hasFired)
         {
+            shotDelayTimer -= Time.deltaTime;
+            if (shotDelayTimer > 0f) return;
+
             if(projectilePool != null && player != null)
             {
                 RangedAI rangedAI = npc.GetComponent<RangedAI>();

@@ -15,6 +15,7 @@ public class RangedAI : MonoBehaviour
     public float minCooldown = 0.1f;
     public float maxCooldown = 0.5f;
     public float attackDuration = 0.4f;
+    public float shotDelay = 0f;
 
     [Header("Ranged Spacing")]
     public float retreatDistance = 3.5f;
