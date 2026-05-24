@@ -851,6 +851,7 @@ GameObject:
   - component: {fileID: 99122201}
   - component: {fileID: 99122200}
   - component: {fileID: 99122205}
+  - component: {fileID: 99122206}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -971,6 +972,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &99122206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99122199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32cb9b041432a5449920028e47942e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteToCamera
+  mainCamera: {fileID: 0}
+  isBullet: 0
 --- !u!224 &119187326 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1503362400831429066, guid: 70d5d6c5545341742a0ca72ca6dc083e, type: 3}
