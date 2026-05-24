@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 // ========== TEMPORARY: Remove when feature is no longer needed ==========
@@ -147,6 +148,12 @@ public class EnemyPoolManager : MonoBehaviour
 
     private void HandleEnemyDefeated(enemyHealth _) 
     {
+        StartCoroutine(HandleEnemyDefeatedDeferred());
+    }
+
+    private IEnumerator HandleEnemyDefeatedDeferred()
+    {
+        yield return null;
         TrySpawnPending(currentWaveSpawnPoint != null ? currentWaveSpawnPoint : origin);
         CheckWaveCompletion();
     }
