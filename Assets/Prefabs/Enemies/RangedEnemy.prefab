@@ -514,9 +514,12 @@ MonoBehaviour:
   minCooldown: 0.1
   maxCooldown: 0.5
   attackDuration: 0.4
+  shotDelay: 0.5
   retreatDistance: 3.5
   preferredMinDistance: 5
   preferredMaxDistance: 8
+  minAttackInterval: 1.1
+  maxAttackInterval: 2.2
 --- !u!1 &7697933147642948649
 GameObject:
   m_ObjectHideFlags: 0
