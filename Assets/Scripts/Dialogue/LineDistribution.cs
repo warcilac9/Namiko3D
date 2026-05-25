@@ -8,21 +8,24 @@ public class LineDistribution : MonoBehaviour
     public DialogueManager dialogueManager;
     public Collider Player;
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
 
         if(other == Player )
         { 
+          
         foreach (DialogueLines dialogue in dialogueLines)
         {
-                dialogueManager.canInteract = true;
                 dialogueManager.dialoguePool.Enqueue(dialogue);
+                dialogueManager.canInteract = true;
+                
         }
         }
         else
         {
             dialogueManager.canInteract = false;
             dialogueManager.dialogue = null;
+            dialogueManager.dialoguePool.Clear();
         }
         //dialogueManager.dialogue = dialogueLines;
     }
@@ -31,9 +34,13 @@ public class LineDistribution : MonoBehaviour
         if (other == Player)
         {
             dialogueManager.canInteract = false;
+            dialogueManager.dialoguePool.Clear();
             //dialogueManager.dialogue = null;
         }
     }
-
+    private void Update()
+    {
+        Debug.Log(dialogueLines[0]);
+    }
 
 }
