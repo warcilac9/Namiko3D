@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48db720c69d3ddc4a83324ebbae3def5, type: 3}
+  m_Name: Navaeh
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueLines
+  characterImages: []
+  characterLines:
+  - 'Damn this beach is so H O T !  '
+  - Sadly I cannot get back to town, the road has been blocked due to some "disturbances"
+  - I guess Im trapped here! If I stay one more second in this heat im gonna turn
+    into a FRIED SQUID!
+  index: 0
+  repeatFrom: 0
+  firstInteraction: 0
