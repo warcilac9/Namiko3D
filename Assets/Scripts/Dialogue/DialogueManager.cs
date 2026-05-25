@@ -124,6 +124,7 @@ public class DialogueManager : MonoBehaviour
         dialogue.firstInteraction = false;
         inputHandler.input.SwitchCurrentActionMap("Player");
         dialogue = null;
+        dialoguePool.Clear();
         canvas.GetComponent<Canvas>().enabled = false;
     }
 
