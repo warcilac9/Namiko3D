@@ -19,7 +19,7 @@ public class LineDistribution : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        //dialogueManager.dialogue = null;
+        
     }
 
 

@@ -119,6 +119,7 @@ public class DialogueManager : MonoBehaviour
     {
         dialogue.firstInteraction = false;
         inputHandler.input.SwitchCurrentActionMap("Player");
+        dialogue = null;
         canvas.GetComponent<Canvas>().enabled = false;
     }
 
