@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     public float textSpeed;
 
     public InputHandler inputHandler;
+    public bool canInteract;
 
 
     [SerializeField] private int index;
@@ -55,10 +56,13 @@ public class DialogueManager : MonoBehaviour
     private void GetDialogue()
     {
         Debug.Log("Interacting..");
-        if (dialoguePool != null)
+        if (canInteract)
         {
-            dialogue = dialoguePool.Peek();
-            StartDialogue(dialogue);
+            if (dialoguePool != null)
+            {
+                dialogue = dialoguePool.Peek();
+                StartDialogue(dialogue);
+            }
         }
     }
     private void StartDialogue(DialogueLines SOlines)
