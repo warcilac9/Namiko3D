@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 public class Transformation : MonoBehaviour
 {
     public InputHandler inputHandler;
@@ -8,10 +9,15 @@ public class Transformation : MonoBehaviour
     public bool isTransforming;
     public bool isTransformed;
     [Min(0f)] public float transformDuration = 6f;
+    [Min(0f)] public float transformDurationTimer;
     [Min(0f)] public float transformCooldown = 8f;
+    [Min(0f)] public float transformCooldownTimer = 8f;
     [Min(0f)] public float initialTransformDelay = 3f;
     [Min(0f)] public float detransformAnimationDelay = 1f;
+
+    public float transformCD;
     public RuntimeAnimatorController magicalGirlNamiko;
+    public Image MagicBar;
 
     [SerializeField] Animator animator;
     [SerializeField] Animator animatorNamiko;
@@ -19,10 +25,11 @@ public class Transformation : MonoBehaviour
     bool canTransform;
     RuntimeAnimatorController defaultNamikoController;
 
-
+   
 
     void Awake()
     {
+
         if (animatorNamiko == null && namikoSprite != null)
         {
             animatorNamiko = namikoSprite.GetComponent<Animator>();
@@ -37,6 +44,8 @@ public class Transformation : MonoBehaviour
     void Start()
     {
         canTransform = false;
+        transformDurationTimer = transformDuration;
+        transformCooldownTimer = transformCooldown;
         StartCoroutine(InitialTransformLockout());
     }
 
@@ -54,6 +63,30 @@ public class Transformation : MonoBehaviour
         {
             inputHandler.transforming -= NamikoTransform;
         }
+    }
+    private void Update()
+    {
+        if (isTransformed)
+        {
+            MagicBar.fillAmount = transformDurationTimer/ transformDuration;
+            transformDurationTimer -= Time.deltaTime;
+            if(transformDurationTimer <= 0f)
+            {
+                transformCooldownTimer = transformCooldown;
+                
+            }
+            
+        }
+        if (!isTransformed)
+        {
+            MagicBar.fillAmount = transformCooldownTimer / 8f;
+            transformCooldownTimer += Time.deltaTime;
+            if (transformCooldownTimer >= transformCD)
+            {
+                transformDurationTimer = transformDuration;
+            }
+        }
+            
     }
 
     public void NamikoTransform()
@@ -97,13 +130,15 @@ public class Transformation : MonoBehaviour
 
         if (transformDuration > 0f)
         {
+            
             HeartParticles.gameObject.SetActive(true);
             yield return new WaitForSeconds(transformDuration);
             
         }
 
-        isTransformed = false;
+        
         animator.SetTrigger("Transform");
+        isTransformed = false;
 
         if (detransformAnimationDelay > 0f)
         {

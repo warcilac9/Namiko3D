@@ -11,4 +11,5 @@ public class DialogueLines : ScriptableObject
     public int index;
     public int repeatFrom;
     public bool firstInteraction;
+    public bool CanswitchLines;
 }

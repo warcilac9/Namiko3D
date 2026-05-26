@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class AttackManager : MonoBehaviour
 {
     public int attackPhase = 0;
@@ -11,6 +11,8 @@ public class AttackManager : MonoBehaviour
     public int maxAmmo = 3;
     public int currentAmmo;
     public float reloadTimeout;
+    public float curretAmmoF;
+    public float maxAmmof;
 
 
     [SerializeField] GameObject punchHitbox;
@@ -25,6 +27,7 @@ public class AttackManager : MonoBehaviour
     Coroutine kickHitboxCoroutine;
     [SerializeField] PoolManager poolManager;
     [SerializeField] Transform originTransform;
+    public Image BulletFill;
 
     public InputHandler inputHandler;
 
@@ -45,6 +48,7 @@ public class AttackManager : MonoBehaviour
     {
         currentAmmo = maxAmmo;
         reloadTimer = 0f;
+        
     }
 
     void OnEnable()
@@ -91,6 +95,9 @@ public class AttackManager : MonoBehaviour
 
     void Update()
     {
+        curretAmmoF = currentAmmo;
+        maxAmmof = maxAmmo;
+        BulletFill.fillAmount = curretAmmoF /maxAmmof;
         if (comboTimer > 0)
         {
             comboTimer -= Time.deltaTime;

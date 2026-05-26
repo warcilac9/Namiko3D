@@ -4,14 +4,17 @@ using System.Collections.Generic;
 
 public class LineDistribution : MonoBehaviour
 {
-    public DialogueLines[] dialogueLines;
+    public List<DialogueLines> dialogueLines;
     public DialogueManager dialogueManager;
     public Collider Player;
+    public int maxLineIndex;
+    public DialogueLines currentDialogue;
+    
 
     private void OnTriggerEnter(Collider other)
     {
-
-        if(other == Player )
+        
+        if (other == Player )
         { 
           
         foreach (DialogueLines dialogue in dialogueLines)
@@ -27,20 +30,30 @@ public class LineDistribution : MonoBehaviour
             dialogueManager.dialogue = null;
             dialogueManager.dialoguePool.Clear();
         }
-        //dialogueManager.dialogue = dialogueLines;
+        currentDialogue = dialogueManager.dialoguePool.Peek();
     }
     private void OnTriggerExit(Collider other)
     {
         if (other == Player)
         {
-            dialogueManager.canInteract = false;
-            dialogueManager.dialoguePool.Clear();
+            if(currentDialogue.CanswitchLines)
+            {
+                Debug.Log("Si es true");
+                dialogueLines.Remove(dialogueLines[maxLineIndex]);
+                dialogueManager.canInteract = false;
+                dialogueManager.dialoguePool.Clear();
+            }
+            else
+            {
+                dialogueManager.canInteract = false;
+                dialogueManager.dialoguePool.Clear();
+            }
             //dialogueManager.dialogue = null;
         }
     }
     private void Update()
     {
-        Debug.Log(dialogueLines[0]);
+        
     }
 
 }

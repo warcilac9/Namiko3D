@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48db720c69d3ddc4a83324ebbae3def5, type: 3}
-  m_Name: Trash Enemy
+  m_Name: Navaeh
   m_EditorClassIdentifier: Assembly-CSharp::DialogueLines
   characterImages: []
   characterLines:
-  - I was supposed to fight you but those guys kicked me out of the group!
-  - Aparently having a trash can lid as a shield is "way too unsanitary"
-  - WE ARE BAD GUYS WHY SHOULD WE CARE ABOUT BEING HYGENIC?!!
-  - You play League of Legends but draw the line at a trash can lid?
-  - Weird priorities....
+  - 'Damn this beach is so H O T !  '
+  - Sadly I cannot get back to town, the road has been blocked due to some "disturbances"
+  - I guess Im trapped here! If I stay one more second in this heat im gonna turn
+    into a FRIED SQUID!
   index: 0
   repeatFrom: 0
   firstInteraction: 0
+  CanswitchLines: 1

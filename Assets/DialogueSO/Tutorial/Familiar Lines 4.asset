@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48db720c69d3ddc4a83324ebbae3def5, type: 3}
-  m_Name: VITAE
+  m_Name: Familiar Lines 4
   m_EditorClassIdentifier: Assembly-CSharp::DialogueLines
   characterImages: []
   characterLines:
-  - Sometimes I like to sit around the bay and look up to the sky
-  - I don't know why but I've always been fond of it
-  - Oh I wish I had wings and could fly to it, but maybe Heaven isnt as great as
-    they portay it
-  - It's ok, maybe in another universe I'll be able to go towards it
+  - Oh did I tell you you're a *MAGICAL GIRL*?
+  - I think I forgot LOL
+  - Use E to transform
+  - It makes you more powerful but be careful. It kinda drains out your soul.
   index: 0
   repeatFrom: 0
   firstInteraction: 0
+  CanswitchLines: 0
