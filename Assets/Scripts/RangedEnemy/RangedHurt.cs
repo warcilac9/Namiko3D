@@ -78,7 +78,7 @@ public class RangedHurt : State
         {
             if (anim != null)
             {
-                anim.SetTrigger("IsHurt");
+                anim.SetTrigger("isHurt");
             }
 
             hasTriggeredHurtAnimation = true;
@@ -168,7 +168,7 @@ public class RangedHurt : State
 
         if (anim != null)
         {
-            anim.ResetTrigger("IsHurt");
+            anim.ResetTrigger("isHurt");
             anim.ResetTrigger("isDead");
         }
 
