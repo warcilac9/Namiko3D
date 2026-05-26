@@ -8,6 +8,7 @@ public class Transformation : MonoBehaviour
     public GameObject HeartParticles;
     public bool isTransforming;
     public bool isTransformed;
+    private bool isTransformedBuffer;
     [Min(0f)] public float transformDuration = 6f;
     [Min(0f)] public float transformDurationTimer;
     [Min(0f)] public float transformCooldown = 8f;
@@ -15,7 +16,6 @@ public class Transformation : MonoBehaviour
     [Min(0f)] public float initialTransformDelay = 3f;
     [Min(0f)] public float detransformAnimationDelay = 1f;
 
-    public float transformCD;
     public RuntimeAnimatorController magicalGirlNamiko;
     public Image MagicBar;
 
@@ -23,6 +23,7 @@ public class Transformation : MonoBehaviour
     [SerializeField] Animator animatorNamiko;
 
     bool canTransform;
+    float currentCooldownDuration;
     RuntimeAnimatorController defaultNamikoController;
 
    
@@ -43,10 +44,8 @@ public class Transformation : MonoBehaviour
 
     void Start()
     {
-        canTransform = false;
         transformDurationTimer = transformDuration;
-        transformCooldownTimer = transformCooldown;
-        StartCoroutine(InitialTransformLockout());
+        BeginCooldown(initialTransformDelay > 0f ? initialTransformDelay : transformCooldown);
     }
 
     void OnEnable()
@@ -66,24 +65,45 @@ public class Transformation : MonoBehaviour
     }
     private void Update()
     {
-        if (isTransformed)
+        if (isTransformedBuffer)
         {
-            MagicBar.fillAmount = transformDurationTimer/ transformDuration;
-            transformDurationTimer -= Time.deltaTime;
-            if(transformDurationTimer <= 0f)
+            if (transformDuration > 0f)
             {
-                transformCooldownTimer = transformCooldown;
-                
+                transformDurationTimer = Mathf.Max(0f, transformDurationTimer - Time.deltaTime);
+                MagicBar.fillAmount = transformDurationTimer / transformDuration;
             }
-            
-        }
-        if (!isTransformed)
-        {
-            MagicBar.fillAmount = transformCooldownTimer / 8f;
-            transformCooldownTimer += Time.deltaTime;
-            if (transformCooldownTimer >= transformCD)
+            else
             {
-                transformDurationTimer = transformDuration;
+                MagicBar.fillAmount = 0f;
+            }
+        }
+
+        if (!isTransformedBuffer)
+        {
+            if (!canTransform)
+            {
+                transformCooldownTimer += Time.deltaTime;
+
+                if (currentCooldownDuration > 0f)
+                {
+                    transformCooldownTimer = Mathf.Min(transformCooldownTimer, currentCooldownDuration);
+                    MagicBar.fillAmount = transformCooldownTimer / currentCooldownDuration;
+                }
+                else
+                {
+                    transformCooldownTimer = 0f;
+                    MagicBar.fillAmount = 1f;
+                }
+
+                if (transformCooldownTimer >= currentCooldownDuration)
+                {
+                    canTransform = true;
+                    transformDurationTimer = transformDuration;
+                }
+            }
+            else
+            {
+                MagicBar.fillAmount = 1f;
             }
         }
             
@@ -97,14 +117,16 @@ public class Transformation : MonoBehaviour
         StartCoroutine(TransformationFlow());
     }
 
-    IEnumerator InitialTransformLockout()
+    void BeginCooldown(float cooldownDuration)
     {
-        if (initialTransformDelay > 0f)
-        {
-            yield return new WaitForSeconds(initialTransformDelay);
-        }
+        currentCooldownDuration = Mathf.Max(0f, cooldownDuration);
+        transformCooldownTimer = 0f;
+        canTransform = currentCooldownDuration <= 0f;
 
-        canTransform = true;
+        if (canTransform)
+        {
+            transformDurationTimer = transformDuration;
+        }
     }
 
     IEnumerator TransformationFlow()
@@ -127,6 +149,9 @@ public class Transformation : MonoBehaviour
         }
 
         isTransformed = true;
+        isTransformedBuffer = true;
+        transformDurationTimer = transformDuration;
+
 
         if (transformDuration > 0f)
         {
@@ -152,13 +177,8 @@ public class Transformation : MonoBehaviour
         }
 
         isTransforming = false;
-
-        if (transformCooldown > 0f)
-        {
-            yield return new WaitForSeconds(transformCooldown);
-        }
-
-        canTransform = true;
+        isTransformedBuffer = false;
+        BeginCooldown(transformCooldown);
     }
 
 }

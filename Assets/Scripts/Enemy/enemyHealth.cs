@@ -5,7 +5,7 @@ public class enemyHealth : MonoBehaviour, iDamageable
 {
     [Header("Health")]
     public float MaxHealth = 30;
-    public Collider hitBox;
+    //public Collider hitBox;
 
     [Header("Damage Reaction")]
     [SerializeField] private float defaultHurtDuration = 0.4f;
