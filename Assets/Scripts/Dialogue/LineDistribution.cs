@@ -21,6 +21,7 @@ public class LineDistribution : MonoBehaviour
         {
                 dialogueManager.dialoguePool.Enqueue(dialogue);
                 dialogueManager.canInteract = true;
+                currentDialogue = dialogueManager.dialoguePool.Peek();
                 
         }
         }
@@ -30,7 +31,7 @@ public class LineDistribution : MonoBehaviour
             dialogueManager.dialogue = null;
             dialogueManager.dialoguePool.Clear();
         }
-        currentDialogue = dialogueManager.dialoguePool.Peek();
+        
     }
     private void OnTriggerExit(Collider other)
     {
