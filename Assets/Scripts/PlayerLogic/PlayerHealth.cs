@@ -1,8 +1,8 @@
 using System;
-using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 using Unity.Cinemachine;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour, iDamageable
 {
@@ -21,23 +21,19 @@ public class PlayerHealth : MonoBehaviour, iDamageable
 
     public event Action onDeath;
 
-    public CinemachineImpulseSource impulseSource;    
-
+    public CinemachineImpulseSource impulseSource;
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent<damagePlayer>(out var damagePlayer))
+        if (other.TryGetComponent<damagePlayer>(out var damagePlayer))
         {
-
             receiveDamage(damagePlayer.damage);
-            
-
         }
     }
 
     void Update()
     {
-        if(health <= 0)
+        if (health <= 0)
         {
             Death();
         }
@@ -45,24 +41,28 @@ public class PlayerHealth : MonoBehaviour, iDamageable
 
     public void receiveDamage(float amount)
     {
-        if(health > 0 && canRecieveDmg)
+        if (health > 0 && canRecieveDmg)
         {
-            
-            Debug.Log("Received "+amount+" damage");
+            Debug.Log("Received " + amount + " damage");
             health = health - amount;
             healthBar.fillAmount = health / 100f;
             StartCoroutine(iFrame());
             StartCoroutine(CanMove());
             onHurt?.Invoke();
-            
-
         }
+    }
+
+    public void healPlayer(float amount)
+    {
+        health = Mathf.Min(health + amount, 100f);
+        healthBar.fillAmount = health / 100f;
     }
 
     void Death()
     {
         onDeath?.Invoke();
     }
+
     IEnumerator iFrame()
     {
         onCameraShake?.Invoke(impulseSource);
@@ -70,13 +70,12 @@ public class PlayerHealth : MonoBehaviour, iDamageable
         yield return new WaitForSeconds(iFrameSec);
         canRecieveDmg = true;
     }
+
     IEnumerator CanMove()
     {
-        
         inputHandler.movementValue = Vector2.zero;
         inputHandler.gameObject.SetActive(false);
         yield return new WaitForSeconds(stun);
         inputHandler.gameObject.SetActive(true);
     }
-    
 }

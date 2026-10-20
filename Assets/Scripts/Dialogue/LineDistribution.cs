@@ -1,6 +1,6 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class LineDistribution : MonoBehaviour
 {
@@ -9,21 +9,17 @@ public class LineDistribution : MonoBehaviour
     public Collider Player;
     public int maxLineIndex;
     public DialogueLines currentDialogue;
-    
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        if (other == Player )
-        { 
-          
-        foreach (DialogueLines dialogue in dialogueLines)
+        if (other == Player)
         {
+            foreach (DialogueLines dialogue in dialogueLines)
+            {
                 dialogueManager.dialoguePool.Enqueue(dialogue);
                 dialogueManager.canInteract = true;
                 currentDialogue = dialogueManager.dialoguePool.Peek();
-                
-        }
+            }
         }
         else
         {
@@ -31,15 +27,14 @@ public class LineDistribution : MonoBehaviour
             dialogueManager.dialogue = null;
             dialogueManager.dialoguePool.Clear();
         }
-        
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other == Player)
         {
-            if(currentDialogue.CanswitchLines)
+            if (currentDialogue.CanswitchLines)
             {
-                Debug.Log("Si es true");
                 dialogueLines.Remove(dialogueLines[maxLineIndex]);
                 dialogueManager.canInteract = false;
                 dialogueManager.dialoguePool.Clear();
@@ -52,9 +47,6 @@ public class LineDistribution : MonoBehaviour
             //dialogueManager.dialogue = null;
         }
     }
-    private void Update()
-    {
-        
-    }
 
+    private void Update() { }
 }
