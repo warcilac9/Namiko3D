@@ -12,12 +12,14 @@ public class InputHandlerBtn : MonoBehaviour
     public delegate void ButtonClick();
     public ButtonClick sendNewGame;
     public ButtonClick backToMenu;
-    public ButtonClick openMenu;
+
+    public delegate void ButtonClickValue(int value);
+    public ButtonClickValue openMenu;
 
     void Start()
     {
         newGameBtn.onClick.AddListener(() => sendNewGame?.Invoke());
-        options.onClick.AddListener(() => openMenu?.Invoke());
+        options.onClick.AddListener(() => openMenu?.Invoke(1));
 
         if (bckToMenu != null)
         {

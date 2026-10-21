@@ -15,12 +15,15 @@ public class MenuManager : MonoBehaviour
     {
         inputHandler.pauseGame += ActivateMenu;
         inputHandler.unPauseGame += ActivateMenu;
-        
+        inputHandlerBtn.openMenu += ChangeMenu;
+
+
     }
     void OnDisable()
     {
         inputHandler.pauseGame -= ActivateMenu;
         inputHandler.unPauseGame -= ActivateMenu;
+        inputHandlerBtn.openMenu -= ChangeMenu;
     }
 
     void Start()

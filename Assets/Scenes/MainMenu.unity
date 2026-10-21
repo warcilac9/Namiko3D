@@ -621,6 +621,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InputHandlerBtn
   newGameBtn: {fileID: 1429726656}
   bckToMenu: {fileID: 0}
+  options: {fileID: 0}
 --- !u!4 &1265246535
 Transform:
   m_ObjectHideFlags: 0
@@ -976,7 +977,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 0.7302271, b: 0.49411762, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.4716981, g: 0.4222273, b: 0.40272337, a: 1}
     m_SelectedColor: {r: 1, g: 0.7294118, b: 0.4901961, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
