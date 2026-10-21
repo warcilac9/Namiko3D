@@ -5998,7 +5998,7 @@ GameObject:
   - component: {fileID: 309555634}
   - component: {fileID: 309555636}
   - component: {fileID: 309555635}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10792,7 +10792,7 @@ GameObject:
   - component: {fileID: 804195121}
   - component: {fileID: 804195120}
   - component: {fileID: 804195119}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12014,7 +12014,7 @@ GameObject:
   - component: {fileID: 856903444}
   - component: {fileID: 856903443}
   - component: {fileID: 856903442}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12063,10 +12063,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 0.2688679, b: 0.2688679, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_HighlightedColor: {r: 0.9964175, g: 0.27058828, b: 1, a: 1}
+    m_PressedColor: {r: 1, g: 0.042452812, b: 0.042452812, a: 1}
+    m_SelectedColor: {r: 0.3537736, g: 1, b: 0.5724234, a: 1}
+    m_DisabledColor: {r: 0.05660379, g: 0.016286938, b: 0.016286938, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -13027,7 +13027,7 @@ GameObject:
   - component: {fileID: 965452580}
   - component: {fileID: 965452582}
   - component: {fileID: 965452581}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13417,7 +13417,7 @@ GameObject:
   - component: {fileID: 988044859}
   - component: {fileID: 988044861}
   - component: {fileID: 988044860}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16528,7 +16528,7 @@ MonoBehaviour:
         value:
           x: -0.07325387
           y: 0.69540143
-          z: -0.0072759986
+          z: -0.0072759935
           w: 0.714841
     - Position:
         x: 44.6
@@ -17257,8 +17257,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260867877}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.007582321, y: -0.017335856, z: -0.00013146955, w: 0.999821}
-  m_LocalPosition: {x: -135.06581, y: 4.1228714, z: -18.397787}
+  m_LocalRotation: {x: -0.007570071, y: -0.01746387, z: -0.00013222669, w: 0.99981886}
+  m_LocalPosition: {x: -135.06265, y: 4.1231728, z: -18.397717}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18557,7 +18557,7 @@ GameObject:
   - component: {fileID: 1334227281}
   - component: {fileID: 1334227283}
   - component: {fileID: 1334227282}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19526,7 +19526,7 @@ GameObject:
   - component: {fileID: 1435705020}
   - component: {fileID: 1435705019}
   - component: {fileID: 1435705018}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Resume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19575,7 +19575,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.2028302, b: 0.2028302, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -21341,7 +21341,7 @@ GameObject:
   - component: {fileID: 1563281717}
   - component: {fileID: 1563281719}
   - component: {fileID: 1563281718}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22678,8 +22678,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678035144}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.007582321, y: -0.017335856, z: -0.00013146955, w: 0.999821}
-  m_LocalPosition: {x: -135.06581, y: 4.1228714, z: -18.397787}
+  m_LocalRotation: {x: -0.007570071, y: -0.01746387, z: -0.00013222669, w: 0.99981886}
+  m_LocalPosition: {x: -135.06265, y: 4.1231728, z: -18.397717}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22728,7 +22728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineSplineDolly
   m_SplineSettings:
     Spline: {fileID: 1199565130}
-    Position: 0.04156589
+    Position: 0.041573152
     Units: 1
   SplineOffset: {x: 0, y: 0, z: 0}
   CameraRotation: 4
@@ -23671,7 +23671,7 @@ GameObject:
   - component: {fileID: 1724127576}
   - component: {fileID: 1724127578}
   - component: {fileID: 1724127577}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PausedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24693,7 +24693,7 @@ GameObject:
   - component: {fileID: 1839220501}
   - component: {fileID: 1839220500}
   - component: {fileID: 1839220499}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25238,7 +25238,7 @@ GameObject:
   - component: {fileID: 1898884743}
   - component: {fileID: 1898884745}
   - component: {fileID: 1898884744}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28822,7 +28822,7 @@ GameObject:
   - component: {fileID: 2140042855}
   - component: {fileID: 2140042854}
   - component: {fileID: 2140042853}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
