@@ -5,19 +5,7 @@ public class PauseManager : MonoBehaviour
 {
     public InputHandler inputHandler;
     public GameObject canvas;
-    private bool isPaused = false;
-
-
-    void OnEnable()
-    {
-        inputHandler.pauseGame += GamePaused;
-        inputHandler.unPauseGame += GamePaused;
-    }
-    void OnDisable()
-    {
-        inputHandler.pauseGame -= GamePaused;
-        inputHandler.unPauseGame -= GamePaused;
-    }
+   public bool isPaused = false;
 
     public void GamePaused()
     {

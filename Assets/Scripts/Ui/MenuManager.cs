@@ -4,22 +4,54 @@ using System.Collections.Generic;
 
 public class MenuManager : MonoBehaviour
 {
-    public Queue<Canvas> menus = new Queue<Canvas>();
-    public List<Canvas> menusInScene = new List<Canvas>();
+    public InputHandler inputHandler;
+    public PauseManager pauseManager;
+    public InputHandlerBtn inputHandlerBtn;
+
+    public Stack<Canvas> menus = new Stack<Canvas>();
+    public Canvas[] canvasInScene;
+
+    void OnEnable()
+    {
+        inputHandler.pauseGame += ActivateMenu;
+        inputHandler.unPauseGame += ActivateMenu;
+        
+    }
+    void OnDisable()
+    {
+        inputHandler.pauseGame -= ActivateMenu;
+        inputHandler.unPauseGame -= ActivateMenu;
+    }
+
     void Start()
     {
-        foreach (Canvas canvas in menusInScene)
-        {
-            menus.Enqueue(canvas);
-            Debug.Log("there's " + menus.Count + "menus on the scene");
-        }
+        menus.Push(canvasInScene[0]);
     }
-    void Update()
+    public void Update()
     {
         
     }
-    public void ChangeMenu()
+    public void ChangeMenu(int canvasToEnable)
     {
+        for (int indexPanels = 0; indexPanels < canvasInScene.Length; indexPanels++)
+        {
+            menus.Push(canvasInScene[indexPanels]);
+            canvasInScene[indexPanels].enabled = indexPanels == canvasToEnable;
+        }
+    }
 
+    public void ActivateMenu()
+    {
+        if(pauseManager.isPaused == false)
+        {
+            pauseManager.GamePaused();
+        }
+        else{ 
+            if (menus.Count > 1)
+            {
+                menus.Pop().enabled = false;
+                menus.Peek().enabled = true;
+            }
+        }
     }
 }

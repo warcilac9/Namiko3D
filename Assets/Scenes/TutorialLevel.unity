@@ -890,6 +890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InputHandlerBtn
   newGameBtn: {fileID: 1121204157}
   bckToMenu: {fileID: 0}
+  options: {fileID: 856903442}
 --- !u!1 &46583910
 GameObject:
   m_ObjectHideFlags: 0
@@ -11941,7 +11942,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.2688679, b: 0.2688679, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -11962,7 +11963,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 856903443}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 986870212}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ChangeMenu
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &856903443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13129,7 +13142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307ee5f8fb3ab7540a358bda8eab40e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuManager
-  menusInScene:
+  inputHandler: {fileID: 42279597}
+  pauseManager: {fileID: 1086382155}
+  inputHandlerBtn: {fileID: 0}
+  canvasInScene:
   - {fileID: 1460347672}
   - {fileID: 46583914}
 --- !u!1 &988044858
@@ -14819,13 +14835,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1086382153}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98de7793d038e9a429e1590404283829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   inputHandler: {fileID: 42279597}
   canvas: {fileID: 1460347668}
+  isPaused: 0
 --- !u!114 &1100901537 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 179670381686249687, guid: 0dc42ab21d93c5647a22afba757e0061, type: 3}
@@ -16982,8 +16999,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260867877}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.007582321, y: -0.017335856, z: -0.00013146955, w: 0.999821}
-  m_LocalPosition: {x: -135.06581, y: 4.1228714, z: -18.397787}
+  m_LocalRotation: {x: -0.007570071, y: -0.01746387, z: -0.00013222669, w: 0.99981886}
+  m_LocalPosition: {x: -135.06265, y: 4.1231728, z: -18.397717}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22402,8 +22419,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678035144}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.007582321, y: -0.017335856, z: -0.00013146955, w: 0.999821}
-  m_LocalPosition: {x: -135.06581, y: 4.1228714, z: -18.397787}
+  m_LocalRotation: {x: -0.007570071, y: -0.01746387, z: -0.00013222669, w: 0.99981886}
+  m_LocalPosition: {x: -135.06265, y: 4.1231728, z: -18.397717}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22452,7 +22469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineSplineDolly
   m_SplineSettings:
     Spline: {fileID: 1199565130}
-    Position: 0.04156583
+    Position: 0.041573152
     Units: 1
   SplineOffset: {x: 0, y: 0, z: 0}
   CameraRotation: 4
