@@ -42,6 +42,7 @@ public class MenuManager : MonoBehaviour
 
     public void ActivateMenu()
     {
+        Debug.Log(menus.Count + " menu count");
         if(pauseManager.isPaused == false)
         {
             pauseManager.GamePaused();
@@ -52,6 +53,11 @@ public class MenuManager : MonoBehaviour
                 menus.Pop().enabled = false;
                 menus.Peek().enabled = true;
             }
-        }
+            if(menus.Count == 1 && pauseManager.isPaused)
+            {
+                pauseManager.GamePaused();
+            }
+            }
+        
     }
 }
