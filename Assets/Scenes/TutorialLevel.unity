@@ -12084,19 +12084,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 856903443}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 986870212}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: ChangeMenu
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &856903443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16528,7 +16516,7 @@ MonoBehaviour:
         value:
           x: -0.07325387
           y: 0.69540143
-          z: -0.0072759935
+          z: -0.0072759986
           w: 0.714841
     - Position:
         x: 44.6
@@ -17257,8 +17245,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260867877}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.007570071, y: -0.01746387, z: -0.00013222669, w: 0.99981886}
-  m_LocalPosition: {x: -135.06265, y: 4.1231728, z: -18.397717}
+  m_LocalRotation: {x: -0.007582321, y: -0.017335856, z: -0.00013146955, w: 0.999821}
+  m_LocalPosition: {x: -135.06581, y: 4.1228714, z: -18.397787}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19867,7 +19855,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1460347669
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19941,7 +19929,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1460347668}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -22678,8 +22666,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678035144}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.007570071, y: -0.01746387, z: -0.00013222669, w: 0.99981886}
-  m_LocalPosition: {x: -135.06265, y: 4.1231728, z: -18.397717}
+  m_LocalRotation: {x: -0.007582321, y: -0.017335856, z: -0.00013146955, w: 0.999821}
+  m_LocalPosition: {x: -135.06581, y: 4.1228714, z: -18.397787}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22728,7 +22716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineSplineDolly
   m_SplineSettings:
     Spline: {fileID: 1199565130}
-    Position: 0.041573152
+    Position: 0.04156583
     Units: 1
   SplineOffset: {x: 0, y: 0, z: 0}
   CameraRotation: 4

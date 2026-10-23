@@ -32,12 +32,12 @@ public class MenuManager : MonoBehaviour
     }
     public void Update()
     {
-        
+        Debug.Log("Num menus: " + menus.Count);
     }
     public void ChangeMenu(int canvasToEnable)
     {
         for (int indexPanels = 0; indexPanels < canvasInScene.Length; indexPanels++)
-        {
+        {    
             menus.Push(canvasInScene[indexPanels]);
             canvasInScene[indexPanels].enabled = indexPanels == canvasToEnable;
         }
@@ -45,10 +45,11 @@ public class MenuManager : MonoBehaviour
 
     public void ActivateMenu()
     {
-        Debug.Log(menus.Count + " menu count");
+        //Debug.Log(menus.Count + " menu count");
         if(pauseManager.isPaused == false)
         {
             pauseManager.GamePaused();
+            canvasInScene[0].enabled = true;
         }
         else{ 
             if (menus.Count > 1)
@@ -59,6 +60,7 @@ public class MenuManager : MonoBehaviour
             if(menus.Count == 1 && pauseManager.isPaused)
             {
                 pauseManager.GamePaused();
+                canvasInScene[0].enabled = false;
             }
             }
         
