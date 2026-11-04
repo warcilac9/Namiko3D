@@ -479,11 +479,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemyHealth
   MaxHealth: 30
-  hitBox: {fileID: 4134610683553649603}
+  healthDropChance: 0.25
   defaultHurtDuration: 1
   deathAnimationDuration: 1
   duplicateHitGraceSeconds: 0.08
   pSHurt: {fileID: 1123454242542903204}
+  spawnObjEvent: {fileID: 11400000, guid: 5283909f8b781bb41b2b1f79efd8b634, type: 2}
 --- !u!114 &6023396087444625415
 MonoBehaviour:
   m_ObjectHideFlags: 0

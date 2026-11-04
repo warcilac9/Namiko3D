@@ -1,24 +1,37 @@
-using UnityEngine;
 using System;
+using UnityEngine;
 
 public class enemyHealth : MonoBehaviour, iDamageable
 {
     [Header("Health")]
     public float MaxHealth = 30;
+
     //public Collider hitBox;
 
+    [Header("Health Drop")]
+    [SerializeField, Range(0f, 1f)]
+    private float healthDropChance = 0.25f;
+
     [Header("Damage Reaction")]
-    [SerializeField] private float defaultHurtDuration = 0.4f;
-    [SerializeField] private float deathAnimationDuration = 1f;
-    [SerializeField] private float duplicateHitGraceSeconds = 0.08f;
-    [SerializeField] private ParticleSystem pSHurt;
+    [SerializeField]
+    private float defaultHurtDuration = 0.4f;
+
+    [SerializeField]
+    private float deathAnimationDuration = 1f;
+
+    [SerializeField]
+    private float duplicateHitGraceSeconds = 0.08f;
+
+    [SerializeField]
+    private ParticleSystem pSHurt;
 
     private float health;
+    public spawnObjEvent spawnObjEvent;
     private bool pendingDeathFinalization;
     private bool canReceiveDamage;
     private damageDealer lastDamageDealer;
     private float lastDamageTime;
-    
+
     public event Action<enemyHealth> OnEnemyDefeated;
     public event Action<EnemyDamagePayload> OnDamageReceived;
 
@@ -36,7 +49,7 @@ public class enemyHealth : MonoBehaviour, iDamageable
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent<damageDealer>(out var dealer))
+        if (other.TryGetComponent<damageDealer>(out var dealer))
         {
             if (dealer == lastDamageDealer && Time.time - lastDamageTime < duplicateHitGraceSeconds)
             {
@@ -48,19 +61,24 @@ public class enemyHealth : MonoBehaviour, iDamageable
             receiveDamage(dealer.damage);
         }
     }
+
     public void receiveDamage(float dmgAmount)
     {
         if (!canReceiveDamage || health <= 0f)
         {
             return;
-        } 
+        }
 
         health -= dmgAmount;
         pSHurt.Play();
         bool isLethal = health <= 0f;
         Debug.Log($"[{gameObject.name}] health remaining: {health}/{MaxHealth}", this);
 
-        EnemyDamagePayload payload = new EnemyDamagePayload(amount: dmgAmount, hurtDuration: defaultHurtDuration, isLethal: isLethal);
+        EnemyDamagePayload payload = new EnemyDamagePayload(
+            amount: dmgAmount,
+            hurtDuration: defaultHurtDuration,
+            isLethal: isLethal
+        );
 
         OnDamageReceived?.Invoke(payload);
 
@@ -78,8 +96,20 @@ public class enemyHealth : MonoBehaviour, iDamageable
         }
 
         pendingDeathFinalization = false;
+        TrySpawnHealthObject();
         OnEnemyDefeated?.Invoke(this);
         gameObject.SetActive(false);
+    }
+
+    private void TrySpawnHealthObject()
+    {
+        float chance = Mathf.Clamp01(healthDropChance);
+        if (chance <= 0f || (chance < 1f && UnityEngine.Random.value >= chance))
+        {
+            return;
+        }
+
+        spawnObjEvent.Occurred(transform);
     }
 
     public void SetCanReceiveDamage(bool value)
@@ -95,6 +125,4 @@ public class enemyHealth : MonoBehaviour, iDamageable
         lastDamageDealer = null;
         lastDamageTime = -999f;
     }
-
-
 }
