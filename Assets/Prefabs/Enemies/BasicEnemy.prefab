@@ -361,6 +361,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteToCamera
   mainCamera: {fileID: 0}
   isBullet: 0
+  directionCount: 8
+  hysteresisDegrees: 6
+  turnSpeed: 360
 --- !u!54 &3606876112405218786
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -585,7 +588,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 0f8c60fc1648f194f814a3c9e92c39a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

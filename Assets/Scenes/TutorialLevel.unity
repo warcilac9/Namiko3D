@@ -1165,7 +1165,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 6fdfc80edea7b0140957e6eb881f72f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1283,7 +1283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1615826923490141126, guid: 70d5d6c5545341742a0ca72ca6dc083e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 26.663086
+      value: 26.662903
       objectReference: {fileID: 0}
     - target: {fileID: 2699081827198878421, guid: 70d5d6c5545341742a0ca72ca6dc083e, type: 3}
       propertyPath: m_Name
@@ -2809,7 +2809,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7355a9aa8bef58442aae0ed31a422683, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2835,6 +2835,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteToCamera
   mainCamera: {fileID: 0}
   isBullet: 0
+  directionCount: 8
+  hysteresisDegrees: 6
+  turnSpeed: 360
 --- !u!114 &99122207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4005,7 +4008,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: b0b9d87c758cd6643b791ee9c365ba31, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4047,6 +4050,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteToCamera
   mainCamera: {fileID: 0}
   isBullet: 0
+  directionCount: 8
+  hysteresisDegrees: 6
+  turnSpeed: 360
 --- !u!114 &166755071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4377,6 +4383,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteToCamera
   mainCamera: {fileID: 0}
   isBullet: 0
+  directionCount: 8
+  hysteresisDegrees: 6
+  turnSpeed: 360
 --- !u!212 &189095953
 SpriteRenderer:
   serializedVersion: 2
@@ -4424,7 +4433,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: b0b9d87c758cd6643b791ee9c365ba31, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -6192,7 +6201,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 95cf2f00e158f6c419f7c91c597b62cd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -6234,6 +6243,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteToCamera
   mainCamera: {fileID: 0}
   isBullet: 0
+  directionCount: 8
+  hysteresisDegrees: 6
+  turnSpeed: 360
 --- !u!114 &324496657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7500,7 +7512,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 27ba2f53350fba943bb8a7d5a8fec57b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -7581,6 +7593,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteToCamera
   mainCamera: {fileID: 0}
   isBullet: 0
+  directionCount: 8
+  hysteresisDegrees: 6
+  turnSpeed: 360
 --- !u!114 &468435415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9988,6 +10003,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteToCamera
   mainCamera: {fileID: 0}
   isBullet: 0
+  directionCount: 8
+  hysteresisDegrees: 6
+  turnSpeed: 360
 --- !u!212 &715208635
 SpriteRenderer:
   serializedVersion: 2
@@ -10035,7 +10053,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: b0b9d87c758cd6643b791ee9c365ba31, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -14422,7 +14440,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 1553a2ed834418c40b9a87d0c087d75f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -14503,6 +14521,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteToCamera
   mainCamera: {fileID: 0}
   isBullet: 0
+  directionCount: 8
+  hysteresisDegrees: 6
+  turnSpeed: 360
 --- !u!114 &1069309535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17013,8 +17034,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260867877}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.007582321, y: -0.017335856, z: -0.00013146955, w: 0.999821}
-  m_LocalPosition: {x: -135.06581, y: 4.1228714, z: -18.397787}
+  m_LocalRotation: {x: -0.0075822393, y: -0.017336467, z: -0.00013147277, w: 0.999821}
+  m_LocalPosition: {x: -135.0658, y: 4.1228733, z: -18.397793}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20369,7 +20390,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 4a7291bbeb9f16c459e95f22bad49afe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -20451,6 +20472,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteToCamera
   mainCamera: {fileID: 0}
   isBullet: 0
+  directionCount: 8
+  hysteresisDegrees: 6
+  turnSpeed: 360
 --- !u!114 &1512498154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22452,8 +22476,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678035144}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.007582321, y: -0.017335856, z: -0.00013146955, w: 0.999821}
-  m_LocalPosition: {x: -135.06581, y: 4.1228714, z: -18.397787}
+  m_LocalRotation: {x: -0.0075822393, y: -0.017336467, z: -0.00013147277, w: 0.999821}
+  m_LocalPosition: {x: -135.0658, y: 4.1228733, z: -18.397793}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29703,6 +29727,10 @@ PrefabInstance:
     - target: {fileID: 1381726542775624562, guid: 4a4528c0c8d625d4d8a8f9b0373dff37, type: 3}
       propertyPath: m_Name
       value: Dummy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081586719434626090, guid: 4a4528c0c8d625d4d8a8f9b0373dff37, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
