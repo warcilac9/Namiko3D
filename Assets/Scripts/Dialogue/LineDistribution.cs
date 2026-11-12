@@ -21,12 +21,6 @@ public class LineDistribution : MonoBehaviour
                 currentDialogue = dialogueManager.dialoguePool.Peek();
             }
         }
-        else
-        {
-            dialogueManager.canInteract = false;
-            dialogueManager.dialogue = null;
-            dialogueManager.dialoguePool.Clear();
-        }
     }
 
     private void OnTriggerExit(Collider other)

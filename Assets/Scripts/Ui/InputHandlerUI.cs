@@ -19,7 +19,10 @@ public class InputHandlerBtn : MonoBehaviour
     void Start()
     {
         newGameBtn.onClick.AddListener(() => sendNewGame?.Invoke());
-        options.onClick.AddListener(() => openMenu?.Invoke(1));
+        if (options != null)
+        {
+            options.onClick.AddListener(() => openMenu?.Invoke(1));
+        }
 
         if (bckToMenu != null)
         {

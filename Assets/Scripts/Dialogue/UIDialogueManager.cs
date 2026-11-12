@@ -6,7 +6,7 @@ public class UIDialogueManager : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if(other.TryGetComponent<PlayerHealth>(out var playerHealth))
+        if (other.TryGetComponent<PlayerHealth>(out _))
         {
             ButtonUi.SetActive(true);
         }
@@ -14,6 +14,9 @@ public class UIDialogueManager : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        ButtonUi.SetActive(false);
+        if (other.TryGetComponent<PlayerHealth>(out _))
+        {
+            ButtonUi.SetActive(false);
+        }
     }
 }
